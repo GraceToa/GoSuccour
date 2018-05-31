@@ -8,10 +8,10 @@
 		<div class="card bg-ligth">
 			<div class="card-header" th:text="${titul}"></div>
 			<div class="card-body">
-				<h4 class="card-title">
-					<a th:href="@{/formClient}" class="btn btn-primary btn-xs">Create
+			<!--  	<h4 class="card-title">
+					<a th:href="@{/formMechanic}" class="btn btn-primary btn-xs">Create
 						Client</a>
-				</h4>
+				</h4>-->
 				<table class="table table-striped table bordered">
 					<thead class="thead-inverse">
 						<tr>
@@ -20,35 +20,27 @@
 							<th>LastName</th>
 							<th>Email</th>
 							<th>Telephone</th>
-							<th>Adress</th>
-							<th>Country</th>
-							<th>City</th>
-							<th>Cp</th>
+							<th>Address</th>
 							<th>Date</th>
-							<th>Create Facture</th>
 							<th>Edit</th>
 							<th>Delete</th>
 						</tr>
 					</thead>
 					<tboyd>
-					<tr th:each="client: ${clients}">
+					<tr th:each="mechanic: ${mechanics}">
 						<td><a class="btn btn-primary btn-xs"
-							th:href="@{/seeClient/}+${client.id}" th:text="${client.id}"></a></td>
-						<td th:text="${client.surname}"></td>
-						<td th:text="${client.lastname}"></td>
-						<td th:text="${client.email}"></td>
-						<td th:text="${client.phone}"></td>
-						<td th:text="${client.address}"></td>
-						<td th:text="${client.country}"></td>
-						<td th:text="${client.city}"></td>
-						<td th:text="${client.cp}"></td>
-						<td th:text="${client.createAt}"></td>
-						<td><a class="btn btn-success btn-xs"
-							th:href="@{'/facture/form/' + ${client.id}}" th:text="'Facture'"></a></td>
+							th:href="@{/seeMechanic/}+${mechanic.id}" th:text="${mechanic.id}"></a></td>
+						<td th:text="${mechanic.surname}"></td>
+						<td th:text="${mechanic.lastname}"></td>
+						<td th:text="${mechanic.email}"></td>
+						<td th:text="${mechanic.phone}"></td>
+						<td th:text="${mechanic.address}"></td>
+						<td th:text="${mechanic.country}+${client.country}+${client.city}+${client.cp}"></td>
+						<td th:text="${mechanic.createAt}"></td>
 						<td><a class="btn btn-primary btn-xs"
-							th:href="@{/formClient/} + ${client.id}" th:text="'edit'"></a></td>
+							th:href="#" th:text="'edit'"></a></td>
 						<td><a class="btn btn-primary btn-xs"
-							th:href="@{/delete/} + ${client.id}" th:text="'delete'"
+							th:href="#" th:text="'delete'"
 							onclick="return confirm('Do you want delete this?');"></a></td>
 					</tr>
 					</tboyd>

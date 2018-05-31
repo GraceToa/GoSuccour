@@ -22,20 +22,23 @@ INSERT INTO products (name, description ,price) VALUES('Moons and CrystalCleaner
 INSERT INTO products (name, description ,price) VALUES('Injection','Revisíon y Cambio de Inyectores',120);
 
 
-/*Mechanic*/
-INSERT INTO mechanics (surname, lastname,email,phone,address,country,city,cp,ubication) VALUES('Pablito','Pinche','pinche@gmail.com','63687728','C/ Teide 62','Spain','Barcelona','08906','');
 
 /* Populate tabla Mechanic */
-INSERT INTO mechanics (surname,lastname,address,phone,country,city,cp,latitude,longitude,createAT) VALUES('Alex','Vinicio','Passeig Manuel Girona 9','932032954','Spain','Barcelona','08034',41.3902045,2.121148,NOW());
-INSERT INTO mechanics (surname,lastname,address,phone,country,city,cp,latitude,longitude,createAT) VALUES('Angel','Donaire','Calle de las Islas Bikini 2','910070559','Spain','Madrid','28100',40.5425712,-3.6391764999999623,NOW());
-INSERT INTO mechanics (surname,lastname,address,phone,country,city,cp,latitude,longitude,createAT) VALUES('Adrian','Arjona','Rambla de Volart 52','934350575','Spain','Barcelona','08041',41.4167147,2.1772022000000106,NOW());
-INSERT INTO mechanics (surname,lastname,address,phone,country,city,cp,latitude,longitude,createAT) VALUES('Rafael','Araujo','Calle San Bernabé 20','913651088','Spain','Madrid','28005',40.4089769,-3.7145907999999963,NOW());
-INSERT INTO mechanics (surname,lastname,address,phone,country,city,cp,latitude,longitude,createAT) VALUES('Marc','Priego','Calle Espatula 5','675173534','Spain','Sevilla','41007',37.415118,-5.950617999999963,NOW());
-INSERT INTO Mechanics (surname,lastname,address,phone,country,city,cp,latitude,longitude,createAT) VALUES('Jordi','Mendez','Calle Maladeta 7','931435579','Spain','Sabadell','08207',41.5678408,2.088619300000005,NOW());
-INSERT INTO Mechanics (surname,lastname,address,phone,country,city,cp,latitude,longitude,createAT) VALUES('Stalin','Bravo','Carrer de Corró 183','658608365','Spain','Granollers","08402',41.6141006,2.2897620999999617,NOW());
-INSERT INTO Mechanics (surname,lastname,address,phone,country,city,cp,latitude,longitude,createAT) VALUES('Roberto','Sami','Carretera de Barcelona 36','677279405','Spain','Viladecans','08840',41.31843,2.024189999999976,NOW());
-INSERT INTO Mechanics (surname,lastname,address,phone,country,city,cp,latitude,longitude,createAT) VALUES('Marcos','Puertas','Calle de Gaztambide 55','647563436','Spain','Madrid','28015',40.4361121,-3.7155402999999296,NOW());
-INSERT INTO Mechanics (surname,lastname,address,phone,country,city,cp,latitude,longitude,createAT) VALUES('Marcelo','Arias','Calle del Valle de Tobalina 34','617791170','Spain','Madrid','28021',40.3407404,-3.7134062000000085,NOW());
+INSERT INTO mechanics (surname,lastname,email,phone,address,country,city,cp,latitude,longitude,create_at) VALUES('Alex','Arjona','alex@gmail.com','932032954','Passeig Manuel Girona 9','Spain','Barcelona','08034',41.3902045,2.121148,NOW());
+INSERT INTO mechanics (surname,lastname,email,phone,address,country,city,cp,latitude,longitude,create_at) VALUES('Adrian','Donaire','adrian@gmail.com','934350575','Passeig Manuel Girona 9','Spain','Tarragona','08034',40.5425712,-3.6391764999999623,NOW());
+INSERT INTO mechanics (surname,lastname,email,phone,address,country,city,cp,latitude,longitude,create_at) VALUES('Rafael','Donosti','rafael@gmail.com','913651088','Passeig Manuel Girona 9','Spain','LLeida','08043',41.4167147,2.1772022000000106,NOW());
+INSERT INTO mechanics (surname,lastname,email,phone,address,country,city,cp,latitude,longitude,create_at) VALUES('Marc','Cisneros','marc@gmail.com','675173534','Passeig Manuel Girona 9','Spain','Mataro','08034',40.4089769,-3.7145907999999963,NOW());
+INSERT INTO mechanics (surname,lastname,email,phone,address,country,city,cp,latitude,longitude,create_at) VALUES('Jordi','Gallardo','jordi@gmail.com','932032954','Passeig Manuel Girona 9','Spain','Cornella','08034',37.415118,-5.950617999999963,NOW());
+INSERT INTO mechanics (surname,lastname,email,phone,address,country,city,cp,latitude,longitude,create_at) VALUES('Stalin','Maldonado','stalin@gmail.com','931435579','Passeig Manuel Girona 9','Spain','Hospitalet','08034',41.5678408,2.088619300000005,NOW());
+INSERT INTO mechanics (surname,lastname,email,phone,address,country,city,cp,latitude,longitude,create_at) VALUES('Roberto','Perez','robert@gmail.com','677279405','Passeig Manuel Girona 9','Spain','Granollers','08034',41.6141006,2.2897620999999617,NOW());
+INSERT INTO mechanics (surname,lastname,email,phone,address,country,city,cp,latitude,longitude,create_at) VALUES('Marcos','Zamaro','marcos@gmail.com','647563436','Passeig Manuel Girona 9','Spain','San Cugat','08034',41.31843,2.024189999999976,NOW());
+INSERT INTO mechanics (surname,lastname,email,phone,address,country,city,cp,latitude,longitude,create_at) VALUES('Marcelo','Wilkinson','marcelo@gmail.com','617791170','Passeig Manuel Girona 9','Spain','Barcelona','08034',40.3407404,-3.7134062000000085,NOW());
+
+
+
+
+
+
 
 
 /*plan*/

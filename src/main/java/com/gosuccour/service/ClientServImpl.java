@@ -240,8 +240,13 @@ public class ClientServImpl implements IClientService {
 	}
 
 	@Override
-	public List<Mechanic> getAllMechanic() {
+	public List<Mechanic> findAllMechanic() {
 		return (List<Mechanic>) mechanicDao.findAll();
+	}
+
+	@Override
+	public Page<Mechanic> findAllMechanic(Pageable pageable) {
+		return mechanicDao.findAll(pageable) ;
 	}
 	
 }// end class

@@ -100,6 +100,8 @@ public interface IClientService {
 	
 	/*Mechanic*/
 	
-	public List<Mechanic> getAllMechanic();
+	public List<Mechanic> findAllMechanic();
+	
+	public Page<Mechanic> findAllMechanic(Pageable pageable);
 	
 }
