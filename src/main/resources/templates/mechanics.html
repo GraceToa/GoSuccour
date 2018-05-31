@@ -16,8 +16,7 @@
 					<thead class="thead-inverse">
 						<tr>
 							<th>id</th>
-							<th>Surname</th>
-							<th>LastName</th>
+							<th>Name</th>
 							<th>Email</th>
 							<th>Telephone</th>
 							<th>Address</th>
@@ -30,17 +29,15 @@
 					<tr th:each="mechanic: ${mechanics}">
 						<td><a class="btn btn-primary btn-xs"
 							th:href="@{/seeMechanic/}+${mechanic.id}" th:text="${mechanic.id}"></a></td>
-						<td th:text="${mechanic.surname}"></td>
-						<td th:text="${mechanic.lastname}"></td>
+						<td th:text="${mechanic.surname}+'&nbsp;'+${mechanic.lastname}"></td>
 						<td th:text="${mechanic.email}"></td>
 						<td th:text="${mechanic.phone}"></td>
-						<td th:text="${mechanic.address}"></td>
-						<td th:text="${mechanic.country}+${client.country}+${client.city}+${client.cp}"></td>
+						<td th:text="${mechanic.city}+'&nbsp;'+${mechanic.cp}"></td>
 						<td th:text="${mechanic.createAt}"></td>
 						<td><a class="btn btn-primary btn-xs"
-							th:href="#" th:text="'edit'"></a></td>
+							href="#" text="'edit'"></a></td>
 						<td><a class="btn btn-primary btn-xs"
-							th:href="#" th:text="'delete'"
+							href="#" text="'delete'"
 							onclick="return confirm('Do you want delete this?');"></a></td>
 					</tr>
 					</tboyd>

@@ -45,7 +45,7 @@ public class AdminController {
 		Page<Mechanic> mechanics=clientService.findAllMechanic(pageableRequest);
 		PageRender<Mechanic> pageRender = new PageRender<Mechanic>("/mechanics", mechanics);
 
-		model.addAttribute("titul", "Client List");
+		model.addAttribute("titul", "Mechanics");
 		// model.addAttribute("clients", clientService.findAll()); sin paginacion
 		model.addAttribute("mechanics", mechanics);
 		model.addAttribute("page", pageRender);
