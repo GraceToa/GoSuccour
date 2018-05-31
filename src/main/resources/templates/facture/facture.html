@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+<head th:replace="layout/layoutUser :: header"></head>
+
+<div class="container py-4">
+	<div class="card bg-light">
+		<div class="card-header" th:text="${titul}" align="center"></div>
+		<div class="navgo">
+			<ul>
+				<li><a th:href="@{'/facture/maintenance/' + ${facture.id}}">Maintenance</a></li>
+				<li><a th:href="@{'/facture/revision/' + ${facture.id}}">Revision</a></li>
+				<li><a th:href="@{'/facture/formItv/' + ${facture.id}}">Itv</a></li>
+				<li><a th:href="@{'/facture/emergency/' + ${facture.id}}">Emergency</a></li>
+			</ul>
+		</div>
+
+		<div class="card-body">
+			<h4 class="card-title">
+				<a class="btn btn-light btn-xs"
+					th:href="@{'/seeClient/' + ${facture.car.client.id}}"
+					th:text="'&laquo; volver'"></a>
+			</h4>
+
+			<ul>
+				<li class="list-group-item"
+					th:text="'FACTURE:' + '&nbsp;'+ '&nbsp;'+ '&nbsp;'+ ${facture.id}"></li>
+				<li class="list-group-item"
+					th:text="'CLIENT:'+'&nbsp;'+'&nbsp;'+'&nbsp;'+${facture.car.client.surname}+'&nbsp;'+'&nbsp;'+${facture.car.client.lastname}"></li>
+				<li class="list-group-item"
+					th:text="'CAR:'+'&nbsp;'+'&nbsp;'+'&nbsp;'+${facture.car.model}+'&nbsp;'+'&nbsp;'+'mtrl:'+'&nbsp;'+'&nbsp;'+${facture.car.matriculation}"></li>
+			</ul>
+
+			<div th:if="${#lists.isEmpty(facture.items)}"
+				class="alert alert-info my-4"
+				th:text="'There are not Services  assigned for the client:'+'&nbsp;'+'&nbsp;'+${facture.car.client.surname}+'&nbsp;'+'&nbsp;'+${facture.car.client.lastname}"></div>
+			<table th:if="${not #lists.isEmpty(facture.items)}"
+				class="table table-bordered table-striped my-4">
+				<thead class="thead-inverse">
+					<tr>
+						<th>Service</th>
+						<th>Price</th>
+					</tr>
+				</thead>
+
+				<tbody>
+
+					<tr th:each="item: ${facture.items}">
+						<td th:text="${item.id}"></td>
+						<td th:text="${item.price}"></td>
+					</tr>
+
+				</tbody>
+			</table>
+
+			<h5>
+				Total <span class="badge badge-secondary" th:text="${facture.price}"></span>
+			</h5>
+
+		</div>
+	</div>
+</div>
+<footer th:replace="/layout/layout :: footer"></footer>
+</body>
+</html>

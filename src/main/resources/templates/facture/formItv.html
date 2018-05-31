@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+<head th:replace="layout/layoutUser :: header"></head>
+
+<div class="container py-4">
+	<div class="card bg-light">
+		<div class="card-header" th:text="${titul}" align="center"></div>
+		<div class="card-body">
+
+
+			<ul>
+				<li class="list-group-item" th:text="'FACTURE:' + '&nbsp;'+ ${msg}"></li>
+				<li class="list-group-item"
+					th:text="'CLIENT:'+'&nbsp;'+${car.client.surname}+'&nbsp;'+${car.client.lastname}"></li>
+				<li class="list-group-item"
+					th:text="'CAR:'+'&nbsp;'+${car.model}+'&nbsp;'+'&nbsp;'+${car.matriculation}"></li>
+						<li class="list-group-item"
+					th:text="'Your car should spend the next ITV in the year :'+'&nbsp;'+${itv.year}"></li>
+
+			</ul>
+
+			<form th:action="@{/facture/saveformItv}" th:object="${itv}"
+				method="post">
+				
+				<input type="hidden" th:field="*{year}"  th:value="${itv.year}" />
+
+				<input type="hidden" name="idFacture" th:value="${facture.id}" />
+				<div class="form-group row">
+					<div class="col-sm-6">
+						<input type="submit" value="Contract ITV" class="btn btn-success " />
+					</div>
+				</div>
+			</form>
+
+			<div>
+				<a class="btn btn-success btn-xs"
+					th:href="@{'/facture/formBack/' + ${msg}}" th:text="'Back Services'"></a>
+			</div>
+
+		</div>
+	</div>
+</div>
+<footer th:replace="/layout/layout :: footer"></footer>
+</body>
+</html>

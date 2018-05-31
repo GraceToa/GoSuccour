@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+	<script type="text/javascript" th:fragment="javascript">
+	
+	$(document).ready(function(){
+		
+			$("#search_product").autocomplete({
+
+				source : function(request, response) {
+					$.ajax({
+						url : "/facture/load-products/" + request.term,
+						dataType : "json",
+						data : {
+							term : request.term
+						},
+						success : function(data) {
+							response($.map(data, function(item) {
+								return {
+									value : item.id,
+									label : item.name,
+									price : item.price,
+								};
+							}));
+						},
+					});
+				},
+				select : function(event, ui) {
+					//$("#search_product").val(ui.item.label);
+					
+					//comprobamos si el producto existe y lo incrementamos valor si es asi
+					if(itemsHelper.hasProduct(ui.item.value)){
+						itemsHelper.incrementQuantity(ui.item.value,ui.item.price);
+						return false;
+					}
+					
+					var line = $("#templateItemsFacture").html();//template-items obtenemos la plantilla
+					
+					line = line.replace(/{ID}/g,ui.item.value);
+					line = line.replace(/{NAME}/g,ui.item.label);
+					line = line.replace(/{PRICE}/g,ui.item.price);
+					
+					$("#loadItemProducts tbody").append(line);//en form agregamos al tbody los valores reemplazados
+					itemsHelper.calculImport(ui.item.value,ui.item.price,1 );
+					return false;
+				}
+			});
+			//eliminamos el input de template-items despues de que envie para no registrarlo
+			$("form").submit(function(){
+				$("#templateItemsFacture").remove();
+				return;
+			});
+		});
+			
+	var itemsHelper ={		
+			calculImport:function(id,price,quantity){
+				$("#total_import_"+ id).html(parseInt(price)* parseInt(quantity));
+				//para cuando se elimina una linea o se aumenta la cantidad
+				this.calculGranTotal();
+				
+			},
+			//se encarga de buscar linea a linea en el detalle de factura si existe el id producto
+			hasProduct: function(id){
+				var result = false;
+				$('input[name="item_id[]"]').each(function(){
+					if(parseInt(id) == parseInt($(this).val())){//es igual al valor actual
+						result=true;
+					}
+				});
+				return result;
+			},
+			incrementQuantity: function(id,price){
+				//si cantidad contiene valor numerico la convertimos en integer
+				//y lo asiganmos a variable cantidad sino devuelve 0
+				var quantity=$("#quantity_"+id).val() ? parseInt($("#quantity_"+id).val()) :0;
+				$("#quantity_"+ id).val(++quantity );
+				this.calculImport(id,price,quantity);
+			},
+			deleteLineFacture: function(id){
+				$("#row_" + id).remove();
+				this.calculGranTotal();
+			},
+			calculGranTotal: function(){
+				var total = 0;
+				
+				$('span[id^="total_import_"]').each(function(){
+					total += parseInt($(this).html());
+				});
+				
+				$('#gran_total').html(total);
+			}
+		}
+	</script>
+</body>
+</html>

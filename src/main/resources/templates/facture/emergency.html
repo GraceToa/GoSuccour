@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+<head th:replace="layout/layoutUser :: header"></head>
+
+<div class="container py-4">
+	<div class="card bg-light">
+		<div class="card-header" th:text="${titul}" align="center"></div>
+		<div class="card-body">
+
+			<ul>
+				<li class="list-group-item" 
+					th:text="'&nbsp;'+'&nbsp;'+${car.client.surname}+'&nbsp;'+'&nbsp;'+${car.client.lastname}+ '&nbsp;'+'&nbsp;'+'You can use Emergencies for your Car: '+'&nbsp;'+${car.model}" align="center"></li>
+			
+
+			</ul>
+
+			<br />
+			
+			<div align="center">
+				<a><img th:src="@{/images/promo-itv2.png}"
+					alt="Spring logo" width="560" height="250" /></a>
+			</div>
+			<br/>
+			<p align="center"><strong>Download our APP</strong></p>
+						<div align="center">
+				<a href="https://play.google.com/store"><img th:src="@{/images/goSuccour1.png}"
+					alt="Spring logo" width="360" height="350" /></a>
+			</div>
+		</div>
+	</div>
+</div>
+<footer th:replace="/layout/layout :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+		<div class="card bg-light">
+			<div class="card-header" th:text="${titul}"></div>
+			<div class="card-body">
+
+				<h1>Welcome Guest</h1>
+		
+
+				<form th:action="@{/facture/prova}" th:object="${maintenance}"
+					method="post">
+						  <label for="sel2">Services of Maintenance </label>
+							<select  class="form-control" th:field="*{listProducts}"  multiple="multiple" style="width: 550px;">
+								<option th:each="allProducts : ${allProducts}" th:field="*{listProducts}" 
+									th:value="${allProducts.id}" th:text="${allProducts.name}" />
+							</select>
+
+					<div class="form-group row">
+						<div class="col-sm-6">
+							<input type="submit" value="save" class="btn btn-secondary" />
+						</div>
+					</div>
+				</form>
+
+			</div>
+		</div>
+	</div>
+	<footer th:replace="/layout/layout :: footer"></footer>
+</body>
+</html>

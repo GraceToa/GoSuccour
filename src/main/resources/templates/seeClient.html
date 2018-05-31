@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<header th:replace="layout/layoutUser :: header"></header>
+
+
+
+	<div class="container py-4">
+		<div class="card bg-light">
+			<div class="card-header" th:text="${titul}" align="center"></div>
+
+			<div class="navgo">
+				<ul>
+					<li><a th:href="@{'/car/form/' + ${client.id}}">Add Car</a></li>
+					<li><a th:href="@{/formClient/} + ${client.id}">Edit</a></li>
+				</ul>
+			</div>
+
+			<div class="card-body">
+
+				<!-- si no hay photo no se muestra el icono -->
+				<img th:if="${#strings.length(client.photo) > 0}"
+					class="img-thumbnail rounded float-left" style="max-width: 25%;"
+					th:src="@{'/uploads/'+ ${client.photo}}" th:alt="${client.photo}" />
+
+				<ul class="list-group">
+					<li class="list-group-item"
+						th:text="${client.surname} + ' ' + '&nbsp;' + ${client.lastname}"></li>
+					<li class="list-group-item"
+						th:text="'email:'+ '&nbsp;' + '&nbsp;' +'&nbsp;' + ${client.email}"></li>
+					<li class="list-group-item"
+						th:text="'telephone:'+ '&nbsp;' + '&nbsp;' +'&nbsp;' + ${client.phone}"></li>
+					<li class="list-group-item"
+						th:text="'address:'+ '&nbsp;' + '&nbsp;' +'&nbsp;' + ${client.address} + '&nbsp;' + ${client.country} +'&nbsp;' +${client.city}+'&nbsp;' + ${client.cp}"></li>
+					<li class="list-group-item"
+						th:text="'registration Date: '+ '&nbsp;' +'&nbsp;' +'&nbsp;' + ${client.createAt}"></li>
+
+				</ul>
+				<div th:if="${#lists.isEmpty(client.listCars)}"
+					class="alert alert-info my-4"
+					th:text="'There are not invoices assigned for the client: ' + ${client.surname} + ' ' + ${client.lastname}"></div>
+				<table th:if="${not #lists.isEmpty(client.listCars)}"
+					class="table table-bordered table-striped my-4">
+					<thead class="thead-inverse">
+						<tr>
+							<th>Car</th>
+							<th>Model</th>
+							<th>Matriculation</th>
+							<th>Pneumatic</th>
+							<th>TypeMotor</th>
+							<th>Displacement</th>
+							<th>Add Services</th>
+							<th>Delete</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr th:each="car: ${client.listCars}">
+							<td th:text="${car.id}"></td>
+							<td th:text="${car.model}"></td>
+							<td th:text="${car.matriculation}"></td>
+							<td th:text="${car.pneumatic}"></td>
+							<td th:text="${car.typeMotor}"></td>
+							<td th:text="${car.displacement}"></td>
+							<td><a class="btn btn-success btn-xs"
+								th:href="@{'/facture/facture/' + ${car.id}}"
+								th:text="'Add Services'"></a></td>
+							<td><a class="btn btn-danger btn-xs"
+								th:href="@{'/car/delete/' + ${car.id}}" th:text="'X'"
+								onclick="return confirm('¿Estas seguro que desea eliminar la factura?');"></a></td>
+
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+	</div>
+	<footer th:replace="/layout/layout :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http//www.thymeleaf.or">
+<head th:replace="layout/layout :: head"></head>
+
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+
+		<div class="card bg-ligth">
+			<div class="card-header" th:text="${titul}"></div>
+			<div class="card-body">
+				<h4 class="card-title">
+					<a class="btn btn-light btn-xs"
+						th:href="@{'/seeClient/' + ${car.client.id}}"
+						th:text="'&laquo; volver'"></a>
+				</h4>
+
+				<form th:action="@{/car/form}" th:object="${car}" method="post">
+
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label" th:text="'Cliente:'"></label>
+						<div class="col-sm-6">
+							<input
+								th:value="${car.client.surname} +' ' + ${car.client.lastname}"
+								class="form-control" disabled='disabled' />
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Model</label>
+						<div class="col-sm-6">
+							<select th:field="*{model}" style="width: 550px;">
+								<option th:each="modelMap : ${modelMap}"
+									th:value="${modelMap.value}" th:text="${modelMap.key}" />
+							</select>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Matriculation</label>
+						<div class="col-sm-6">
+							<input type="text" th:field="*{matriculation}"
+								class="form-control" th:errorclass="'form-control alert-danger'" />
+							<small class="form-text text-danger"
+								th:if="${#fields.hasErrors('matriculation')}"
+								th:errors="*{matriculation}"></small>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Pneumatic</label>
+						<div class="col-sm-6">
+							<select th:field="*{pneumatic}" style="width: 550px;">
+								<option th:each="pneumaticMap : ${pneumaticMap}"
+									th:value="${pneumaticMap.value}" th:text="${pneumaticMap.key}" />
+							</select>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">typeMotor</label>
+						<div class="col-sm-6">
+							<select th:field="*{typeMotor}" style="width: 550px;">
+								<option th:each="motorMap : ${motorMap}"
+									th:value="${motorMap.value}" th:text="${motorMap.key}" />
+							</select>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">displacement</label>
+						<div class="col-sm-6">
+							<select th:field="*{displacement}" style="width: 550px;">
+								<option th:each="displacementMap : ${displacementMap}"
+									th:value="${displacementMap.value}" th:text="${displacementMap.key}" />
+							</select>
+						</div>
+					</div>
+
+
+					<div class="form-group row">
+						<div class="col-sm-6">
+							<input type="submit" th:value="${titul}"
+								class="btn btn-secondary" />
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

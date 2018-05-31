@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+
+
+	<div class="container py-4">
+		<div class="card bg-light">
+			<div class="card-header" th:text="${titul}" align="center"></div>
+
+
+			<div class="card-body">
+
+
+				<ul class="list-group">
+					<li class="list-group-item"
+						th:text="'CLIENT:'+ '&nbsp;' + ${car.client.surname} + ' ' + '&nbsp;' + ${car.client.lastname}"></li>
+					<li class="list-group-item"
+						th:text="'CAR:'+ '&nbsp;' + '&nbsp;' +'&nbsp;' + ${car.model}"></li>
+
+				</ul>
+	
+				<table>
+					<span th:each="car : ${car.listFactures}">
+						<td>
+							<tr th:each="carItem: ${car.items}">
+							<p th:text="'Service:'+ '&nbsp;' + ${carItem.maintenance.identify}"></p>
+							<p>Products:</p>
+								<ul th:each="main : ${carItem.maintenance.listProducts}">
+									<li th:text="${main.name}+ '&nbsp;' +${main.description} +'&nbsp;' +${main.price}"></li>
+								</ul>
+						
+							</tr>
+						<td>
+					</span>
+
+				</table>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="/layout/layout :: footer"></footer>
+</body>
+</html>

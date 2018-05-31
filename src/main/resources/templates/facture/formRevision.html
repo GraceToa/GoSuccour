@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+<head th:replace="layout/layoutUser :: header"></head>
+
+	<div class="container py-4">
+		<div class="card bg-light">
+			<div class="card-header" th:text="${titul}" align="center"></div>
+
+
+			<div class="card-body">
+
+				<ul class="list-group">
+					<li class="list-group-item"
+						th:text="'Car: '+'&nbsp;' +${facture.car.model} + ' ' + '&nbsp;' + ${facture.car.matriculation}"></li>
+					<!--  <li th:text="'Facture id: '+ '&nbsp;' +${facture.id}"></li>-->
+				</ul>
+				
+				<br/>
+				<form th:action="@{/facture/itemRevision}" th:object="${revision}"
+					method="post">
+
+					<div class="form-group row">
+						<div class="col-sm-6">
+							<div>
+								<label for="sel2">&nbsp;&nbsp;&nbsp;&nbsp;Choose your
+									Plan </label>
+									 <select class="form-control" th:field="*{listPlan}"
+									multiple="multiple" style="width: 550px;" th:errorclass="'form-control alert-danger'" >
+									<small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('listPlan')}" th:errors="*{listPlan}"></small>
+									<option th:each="allPlan: ${allPlan}" th:field="*{listPlan}"
+										th:value="${allPlan.id}" th:text="${allPlan.name}" />
+								</select>
+							</div>
+							<br/>
+
+							<div>
+								<label for="sel2">&nbsp;&nbsp;&nbsp;&nbsp;Choose Services of
+									Revision </label> <select class="form-control"
+									th:field="*{listProducts}" multiple="multiple"
+									style="width: 550px;">
+									<option th:each="allProducts : ${allProducts}"
+										th:field="*{listProducts}" th:value="${allProducts.id}"
+										th:text="${allProducts.name}" />
+								</select>
+							</div>
+						</div>
+					</div>
+					<input type="hidden" name="idFacture" th:value="${facture.id}" />
+					<div class="form-group row">
+						<div class="col-sm-6">
+							<input type="submit" value="save" class="btn btn-success" />
+						</div>
+					</div>
+				</form>
+
+			</div>
+		</div>
+	</div>
+	<footer th:replace="/layout/layout :: footer"></footer>
+
+</body>
+</html>
+
+

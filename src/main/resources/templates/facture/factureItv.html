@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+<head th:replace="layout/layoutUser :: header"></head>
+
+<div class="container py-4">
+	<div class="card bg-light">
+		<div class="card-header" th:text="'You have contract Service: '+'&nbsp;'+${titul}" align="center"></div>
+		<div class="card-body">
+
+			<ul>
+				<li class="list-group-item"
+					th:text="'FACTURE:' + '&nbsp;'+ '&nbsp;'+ '&nbsp;'+ ${msg}"></li>
+				<li class="list-group-item"
+					th:text="'CLIENT:'+'&nbsp;'+'&nbsp;'+'&nbsp;'+${car.client.surname}+'&nbsp;'+'&nbsp;'+${car.client.lastname}"></li>
+				<li class="list-group-item"
+					th:text="'CAR:'+'&nbsp;'+'&nbsp;'+'&nbsp;'+${car.model}+'&nbsp;'+'&nbsp;'+'mtrl:'+'&nbsp;'+'&nbsp;'+${car.matriculation}"></li>
+				<li class="list-group-item"
+					th:text="'we  take care of passing the itv of your CAR:'+'&nbsp;'+'&nbsp;'+'&nbsp;'+${car.model}+'&nbsp;'+'&nbsp;'+'Matriculationl:'+'&nbsp;'+'&nbsp;'+${car.matriculation}+'&nbsp;'+'in the YEAR:'+'&nbsp;'+${itv.year}"></li>
+
+			</ul>
+
+			<br />
+
+			<div>
+				<p th:text="'TOTAL: '+'&nbsp;'+${itv.price}+'&euro;'"></p>
+			</div>
+			<div>
+				<a class="btn btn-success btn-xs"
+					th:href="@{'/facture/formBack/' + ${msg}}"
+					th:text="'Back Services'"></a>
+			</div>
+		</div>
+	</div>
+</div>
+<footer th:replace="/layout/layout :: footer"></footer>
+</body>
+</html>
