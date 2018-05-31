@@ -12,6 +12,7 @@ import com.gosuccour.entity.Facture;
 import com.gosuccour.entity.ItemFacture;
 import com.gosuccour.entity.Itv;
 import com.gosuccour.entity.Maintenance;
+import com.gosuccour.entity.Mechanic;
 import com.gosuccour.entity.Plan;
 import com.gosuccour.entity.Product;
 import com.gosuccour.entity.Revision;
@@ -95,5 +96,10 @@ public interface IClientService {
 	
 	/*Location*/
 	public  void saveLocationClient(Coordenadas coordenadas);
+	
+	
+	/*Mechanic*/
+	
+	public List<Mechanic> getAllMechanic();
 	
 }

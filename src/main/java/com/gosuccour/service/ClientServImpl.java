@@ -15,6 +15,7 @@ import com.gosuccour.dao.IFactureDao;
 import com.gosuccour.dao.IItemFactureDao;
 import com.gosuccour.dao.IItv;
 import com.gosuccour.dao.IMaintenanceDao;
+import com.gosuccour.dao.IMechanicDao;
 import com.gosuccour.dao.IPlanDao;
 import com.gosuccour.dao.IProductDao;
 import com.gosuccour.dao.IRevisionDao;
@@ -26,6 +27,7 @@ import com.gosuccour.entity.Facture;
 import com.gosuccour.entity.ItemFacture;
 import com.gosuccour.entity.Itv;
 import com.gosuccour.entity.Maintenance;
+import com.gosuccour.entity.Mechanic;
 import com.gosuccour.entity.Plan;
 import com.gosuccour.entity.Product;
 import com.gosuccour.entity.Revision;
@@ -66,6 +68,9 @@ public class ClientServImpl implements IClientService {
 	
 	@Autowired
 	private ICoordenadasDao coordenadasDao;
+	
+	@Autowired
+	private IMechanicDao mechanicDao;
 
 	@Override
 	@Transactional(readOnly = true)
@@ -232,6 +237,11 @@ public class ClientServImpl implements IClientService {
 	@Override
 	public void saveLocationClient(Coordenadas coordenadas) {
 		coordenadasDao.save(coordenadas);
+	}
+
+	@Override
+	public List<Mechanic> getAllMechanic() {
+		return (List<Mechanic>) mechanicDao.findAll();
 	}
 	
 }// end class
