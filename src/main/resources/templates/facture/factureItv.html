@@ -6,8 +6,15 @@
 
 <div class="container py-4">
 	<div class="card bg-light">
-		<div class="card-header" th:text="'You have contract Service: '+'&nbsp;'+${titul}" align="center"></div>
+		<div class="card-header"
+			th:text="'You have contract Service: '+'&nbsp;'+${titul}"
+			align="center"></div>
 		<div class="card-body">
+
+			<div align="center">
+				<a><img th:src="@{/images/promo-itv2.png}" alt="Spring logo"
+					width="560" height="250" /></a>
+			</div>
 
 			<ul>
 				<li class="list-group-item"
@@ -29,7 +36,13 @@
 			<div>
 				<a class="btn btn-success btn-xs"
 					th:href="@{'/facture/formBack/' + ${msg}}"
-					th:text="'Back Services'"></a>
+					th:text="'Add Services'"></a>
+			</div>
+			<br />
+			<div>
+				<a class="btn btn-success btn-xs"
+					th:href="@{'/seeClient/' + ${car.client.id}}"
+					th:text="'Back Client'"></a>
 			</div>
 		</div>
 	</div>

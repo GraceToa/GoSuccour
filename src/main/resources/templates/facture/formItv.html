@@ -16,17 +16,16 @@
 					th:text="'CLIENT:'+'&nbsp;'+${car.client.surname}+'&nbsp;'+${car.client.lastname}"></li>
 				<li class="list-group-item"
 					th:text="'CAR:'+'&nbsp;'+${car.model}+'&nbsp;'+'&nbsp;'+${car.matriculation}"></li>
-						<li class="list-group-item"
+				<li class="list-group-item"
 					th:text="'Your car should spend the next ITV in the year :'+'&nbsp;'+${itv.year}"></li>
 
 			</ul>
 
 			<form th:action="@{/facture/saveformItv}" th:object="${itv}"
 				method="post">
-				
-				<input type="hidden" th:field="*{year}"  th:value="${itv.year}" />
 
-				<input type="hidden" name="idFacture" th:value="${facture.id}" />
+				<input type="hidden" th:field="*{year}" th:value="${itv.year}" /> <input
+					type="hidden" name="idFacture" th:value="${facture.id}" />
 				<div class="form-group row">
 					<div class="col-sm-6">
 						<input type="submit" value="Contract ITV" class="btn btn-success " />
@@ -36,8 +35,11 @@
 
 			<div>
 				<a class="btn btn-success btn-xs"
-					th:href="@{'/facture/formBack/' + ${msg}}" th:text="'Back Services'"></a>
+					th:href="@{'/facture/formBack/' + ${msg}}"
+					th:text="'Add Services'"></a>
 			</div>
+
+			<br />
 
 		</div>
 	</div>

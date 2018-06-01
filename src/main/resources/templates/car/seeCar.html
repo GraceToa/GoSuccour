@@ -23,7 +23,7 @@
 				</ul>
 	
 				<table>
-					<span th:each="car : ${car.listFactures}">
+				<!--  <span th:each="car : ${car.listFactures}">
 						<td>
 							<tr th:each="carItem: ${car.items}">
 							<p th:text="'Service:'+ '&nbsp;' + ${carItem.maintenance.identify}"></p>
@@ -34,7 +34,13 @@
 						
 							</tr>
 						<td>
-					</span>
+					</span>-->	
+					<tr>
+					<td th:text="${identifyM}"></td>
+					<td th:text="${priceM}"></td>
+					<td th:text="${identifyR}"></td>
+					<td th:text="${priceR}"></td>
+					</tr>
 
 				</table>
 			</div>

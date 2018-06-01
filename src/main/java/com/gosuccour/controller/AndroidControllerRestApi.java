@@ -1,14 +1,25 @@
 package com.gosuccour.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gosuccour.entity.Car;
+import com.gosuccour.entity.Facture;
+import com.gosuccour.entity.ItemFacture;
+import com.gosuccour.entity.Itv;
+import com.gosuccour.entity.Maintenance;
+import com.gosuccour.entity.Plan;
+import com.gosuccour.entity.Product;
+import com.gosuccour.entity.RequestFactura;
+import com.gosuccour.entity.Revision;
 import com.gosuccour.entity.Token;
 import com.gosuccour.service.IClientService;
 
@@ -42,23 +53,80 @@ public class AndroidControllerRestApi {
 		}
 		return null;
 	}
+
+	@RequestMapping("/idCar")
+	public RequestFactura getFacture(@RequestParam(value = "idCar") long idCar, @RequestParam("token") String token) {
+		Car car = new Car();
+		car = clientService.findOneCar(idCar);
+
+		Facture facture = new Facture();
+		facture.setCar(car);
+		clientService.saveFacture(facture);
+
+		RequestFactura factura = new RequestFactura();
+		factura.setId(facture.getId());
+
+		return factura;
+	}
+
+	@RequestMapping("/mantenimiento")
+	public Maintenance saveMaintenance(@RequestBody Maintenance maintenance) {
+		ItemFacture itemFacture = new ItemFacture();
+		Double total = 0.0;
+		List<Product> list = maintenance.getListProducts();
+		for (Product product : list) {
+			total += product.getPrice();
+		}
+		maintenance.setPrice(total);
+		clientService.saveMaintenance(maintenance);
+		itemFacture.setMaintenance(maintenance);
+		itemFacture.setFacture_id(maintenance.getFactura_id());
+		itemFacture.setPrice(maintenance.getPrice());
+		clientService.saveItemFacture(itemFacture);
+
+		return maintenance;
+
+	}
+
+	@RequestMapping("/revision")
+	public Revision saveRevision(@RequestBody Revision revision) {
+		ItemFacture itemFacture = new ItemFacture();
+
+		Double planPorcentaje = null;
+		List<Plan> list = revision.getListPlan();
+		for (Plan plan : list) {
+			planPorcentaje = plan.getPorcentaje();
+		}
+		System.out.println(planPorcentaje);
+		Double totalProduct = 0.0;
+		List<Product> listP = revision.getListProducts();
+		for (Product product : listP) {
+			totalProduct += product.getPrice();
+		}
+		System.out.println(totalProduct);
+		Double totalPorcentaje = revision.totalPriceRevision(planPorcentaje, totalProduct);
+
+		revision.setPrice(totalPorcentaje);
+		clientService.saveRevision(revision);// genera revision bd
+		itemFacture.setRevision(revision);
+		itemFacture.setFacture_id(revision.getFactura_id());
+		itemFacture.setPrice(revision.getPrice());
+		clientService.saveItemFacture(itemFacture);
+
+		return revision;
+
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-//	@PostMapping("/locationClient")
-//	public Coordenadas getLocation(@RequestBody LocationClient locationClient ) {
-//		clientService.saveLocationClient(locationClient);	
-//		return l;
-//		
-//	}
-	
-	
-	
-	
+	@RequestMapping("/itv")
+	public Itv saveItv(@RequestBody Itv itv) {
+		ItemFacture itemFacture = new ItemFacture();	
+		itv.setPrice(120.0);
+		clientService.saveItv(itv);
+		itemFacture.setPrice(itv.getPrice());
+		itemFacture.setFacture_id(itv.getFactura_id());
+		clientService.saveItemFacture(itemFacture);		
+		return itv;
+		
+	}
+
 }

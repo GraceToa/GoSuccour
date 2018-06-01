@@ -38,7 +38,7 @@ public class Maintenance implements Serializable {
 	@JoinTable(name="maintenance_product",joinColumns= {@JoinColumn(name="maintenance_id")},inverseJoinColumns= {@JoinColumn(name="product_id")})
 	private List<Product> listProducts;
 	
-	
+	private Long factura_id;
 
 	public Maintenance() {
 		listProducts = new ArrayList<Product>();
@@ -85,6 +85,14 @@ public class Maintenance implements Serializable {
 	public void setIdentify(String identify) {
 		this.identify = identify;
 	}
-	
+
+	public Long getFactura_id() {
+		return factura_id;
+	}
+
+	public void setFactura_id(Long factura_id) {
+		this.factura_id = factura_id;
+	}
+
 	
 }

@@ -81,7 +81,6 @@ public class FactureController {
 		for (Product product : list) {
 		 total += product.getPrice();			
 		}
-		System.out.println(total);
 		maintenance.setPrice(total);
 		clientService.saveMaintenance(maintenance);//guarda maintenance
 		itemFacture.setMaintenance(maintenance);
@@ -146,11 +145,12 @@ public class FactureController {
 		clientService.saveRevision(revision);//genera revision bd
 		itemFacture.setRevision(revision);
 		itemFacture.setFacture_id(factureId);
+		System.out.println(itemFacture.getFacture_id());
 		itemFacture.setPrice(revision.getPrice());
 		clientService.saveItemFacture(itemFacture);
 		model.addAttribute("revision", revision);
 		model.addAttribute("car", car);
-		model.addAttribute("msg", facture_id);
+		model.addAttribute("msg", factureId);
 		model.addAttribute("titul", "    REVISION ");
 		return "facture/factureRevision";		
 	}

@@ -24,6 +24,8 @@ public class Itv implements Serializable{
 	
 	@Column(name = "identify", insertable=false, updatable = false, nullable = false, columnDefinition = "varchar(50) default 'itv'") 
 	private  String identify="itv";
+	
+	private Long factura_id;
 
 	public Long getId() {
 		return id;
@@ -55,6 +57,14 @@ public class Itv implements Serializable{
 
 	public void setYear(String year) {
 		this.year = year;
+	}
+
+	public Long getFactura_id() {
+		return factura_id;
+	}
+
+	public void setFactura_id(Long factura_id) {
+		this.factura_id = factura_id;
 	} 
 	
 	

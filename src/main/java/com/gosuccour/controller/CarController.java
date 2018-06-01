@@ -1,6 +1,8 @@
 package com.gosuccour.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -22,6 +24,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gosuccour.entity.Car;
 import com.gosuccour.entity.Client;
+import com.gosuccour.entity.Facture;
+import com.gosuccour.entity.ItemFacture;
+import com.gosuccour.entity.Maintenance;
+import com.gosuccour.entity.Revision;
 import com.gosuccour.service.IClientService;
 
 @Controller
@@ -106,9 +112,29 @@ public class CarController {
 		return "redirect:/seeClient/" + car.getClient().getId();
 	}
 
-	@GetMapping("car/{id}")
+	@GetMapping("/seeCar/{id}")
 	public String getCar(@PathVariable(name = "id") Long id, Model model) {
 		Car car = clientService.findOneCar(id);
+		List<Facture>listFact=car.getListFactures();
+		for (Facture facture : listFact) {
+			List<ItemFacture>listItem=facture.getItems();
+			for (ItemFacture itemFacture : listItem) {
+				if (itemFacture.getMaintenance()!=null) {
+					Maintenance maintenance=itemFacture.getMaintenance();
+					model.addAttribute("car", car);
+					model.addAttribute("identifyM", maintenance.getIdentify());
+					model.addAttribute("priceM", maintenance.getPrice());
+					return "car/seeCar";
+
+				}else if (itemFacture.getRevision()!=null) {
+					Revision revision = itemFacture.getRevision();
+					model.addAttribute("car", car);
+					model.addAttribute("identifyR", revision.getIdentify());
+					model.addAttribute("priceR", revision.getPrice());
+					return "car/seeCar";
+				}
+			}
+		}		
 		model.addAttribute("car", car);
 		return "car/seeCar";
 	}

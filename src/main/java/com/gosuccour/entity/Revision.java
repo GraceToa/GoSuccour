@@ -39,7 +39,8 @@ public class Revision implements Serializable{
 	@JoinTable(name="revision_product",joinColumns= {@JoinColumn(name="revision_id")},inverseJoinColumns= {@JoinColumn(name="product_id")})
 	private List<Product> listProducts;
 	
-
+	private Long factura_id;
+	
 	public Long getId() {
 		return id;
 	}
@@ -86,6 +87,14 @@ public class Revision implements Serializable{
 		System.out.println(total);
 		return total;
 		
+	}
+
+	public Long getFactura_id() {
+		return factura_id;
+	}
+
+	public void setFactura_id(Long factura_id) {
+		this.factura_id = factura_id;
 	}
 	 
 }
