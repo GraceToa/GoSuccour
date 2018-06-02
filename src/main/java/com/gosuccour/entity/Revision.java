@@ -96,5 +96,13 @@ public class Revision implements Serializable{
 	public void setFactura_id(Long factura_id) {
 		this.factura_id = factura_id;
 	}
+
+	@Override
+	public String toString() {
+		return "* Service of:  "+" " + identify + ", Price:" + " "+price +" "+ ", Your Plan of:" + listPlan.toString()
+				+ ",Product:" + listProducts ;
+	}
+
+	
 	 
 }

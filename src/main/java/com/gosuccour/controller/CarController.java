@@ -112,9 +112,9 @@ public class CarController {
 	public String getCar(@PathVariable(name = "id") Long id, Model model) {
 		Car car = clientService.findOneCar(id);
 		List<Facture>listFact=car.getListFactures();
-		for (Facture facture : listFact) {
+		/*for (Facture facture : listFact) {
 			List<ItemFacture>listItem=facture.getItems();
-			for (ItemFacture itemFacture : listItem) {
+		for (ItemFacture itemFacture : listItem) {
 				if (itemFacture.getMaintenance()!=null || itemFacture.getRevision()==null) {
 					Maintenance maintenance=itemFacture.getMaintenance();
 					model.addAttribute("car", car);
@@ -138,9 +138,10 @@ public class CarController {
 					model.addAttribute("priceM", maintenance.getPrice());
 					return "car/seeCar";
 				}
-			}
-		}		
+			
+		}	}*/	
 		model.addAttribute("car", car);
+		
 		return "car/seeCar";
 	}
 }

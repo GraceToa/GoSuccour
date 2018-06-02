@@ -177,6 +177,11 @@ public class ClientServImpl implements IClientService {
 	}
 
 	@Override
+	public Facture findFactureById(Long id) {
+		return factureDao.findById(id).orElse(null);
+	}
+
+	@Override
 	public Facture finOneFacture(Long id) {
 		// TODO Auto-generated method stub
 		return factureDao.findById(id).orElse(null);
@@ -248,5 +253,6 @@ public class ClientServImpl implements IClientService {
 	public Page<Mechanic> findAllMechanic(Pageable pageable) {
 		return mechanicDao.findAll(pageable) ;
 	}
+
 	
 }// end class

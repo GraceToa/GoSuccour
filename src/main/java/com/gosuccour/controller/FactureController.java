@@ -138,14 +138,11 @@ public class FactureController {
 		for (Product product : listP) {
 		 totalProduct += product.getPrice();			
 		}
-		System.out.println(totalProduct);
 		Double totalPorcentaje = revision.totalPriceRevision(planPorcentaje, totalProduct);
-
 		revision.setPrice(totalPorcentaje);
 		clientService.saveRevision(revision);//genera revision bd
 		itemFacture.setRevision(revision);
 		itemFacture.setFacture_id(factureId);
-		System.out.println(itemFacture.getFacture_id());
 		itemFacture.setPrice(revision.getPrice());
 		clientService.saveItemFacture(itemFacture);
 		model.addAttribute("revision", revision);
@@ -223,7 +220,14 @@ public class FactureController {
 		
 	}
 	
-	
+	@GetMapping("/seeFacture/{idFacture}")
+	public String seeFacture(@PathVariable(value="idFacture")Long idFacture,Model model) {
+		Facture facture= clientService.findFactureById(idFacture);
+		model.addAttribute("facture", facture);
+		model.addAttribute("titul","Facture: "+ facture.getId());
+		return "facture/seeFacture";
+		
+	}
 	
 	
 	

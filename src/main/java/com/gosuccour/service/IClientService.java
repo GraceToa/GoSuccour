@@ -104,4 +104,18 @@ public interface IClientService {
 	
 	public Page<Mechanic> findAllMechanic(Pageable pageable);
 	
+	/*Facture*/
+	
+	public Facture findFactureById(Long id);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

@@ -170,5 +170,10 @@ public class Client implements Serializable{
 		listCars.add(car);
 	}
 
+	@Override
+	public String toString() {
+		return  surname + " " + lastname ;
+	}
+	
 
 }

@@ -21,31 +21,43 @@
 						th:text="'CAR:'+ '&nbsp;' + '&nbsp;' +'&nbsp;' + ${car.model}"></li>
 
 				</ul>
-	
-				<table>
-				<!--  <span th:each="car : ${car.listFactures}">
-						<td>
-							<tr th:each="carItem: ${car.items}">
-							<p th:text="'Service:'+ '&nbsp;' + ${carItem.maintenance.identify}"></p>
-							<p>Products:</p>
-								<ul th:each="main : ${carItem.maintenance.listProducts}">
-									<li th:text="${main.name}+ '&nbsp;' +${main.description} +'&nbsp;' +${main.price}"></li>
-								</ul>
-						
-							</tr>
-						<td>
-					</span>-->	
-					<tr>
-					<td th:text="${identifyM}"></td>
-					<td th:text="${priceM}"></td>
-					<td th:text="${identifyR}"></td>
-					<td th:text="${priceR}"></td>
-					</tr>
+				
+					<div th:if="${#lists.isEmpty(car.listFactures)}"
+					class="alert alert-info my-4"
+					th:text="'There are not Factures assigned for the Client: ' + ${client.surname} + ' ' + ${client.lastname}"></div>
+				<table th:if="${not #lists.isEmpty(car.listFactures)}"
+					class="table table-bordered table-striped my-4">
+					<thead class="thead-inverse">
+						<tr>
+							<th>Folio</th>
+							<th>Date</th>
+							<th>Total</th>
+							<th>see Facture</th>
+							
+						</tr>
+					</thead>
 
+					<tbody>
+						<tr th:each="carListFactures: ${car.listFactures}">
+							<td th:text="${carListFactures.id}"></td>
+							<td th:text="${carListFactures.createAt}"></td>
+							<td th:text="${carListFactures.total}"></td>
+							<td><a class="btn btn-success btn-xs"
+								th:href="@{'/facture/seeFacture/'+${carListFactures.id}}"
+								th:text="'Details'"></a></td>
+
+						</tr>
+					</tbody>
 				</table>
+				
+				
+				
 			</div>
 		</div>
 	</div>
 	<footer th:replace="/layout/layout :: footer"></footer>
 </body>
 </html>
+
+
+

@@ -31,7 +31,7 @@ public class Maintenance implements Serializable {
 	private Double price;
 	
 	@Column(name = "identify", insertable=false, updatable = false, nullable = false, columnDefinition = "varchar(50) default 'maintenance'") 
-	private  String identify="maintenance"; 
+	private  String identify="_maintenance"; 
 	
 	@NotEmpty
 	@ManyToMany(cascade=CascadeType.ALL)
@@ -93,6 +93,12 @@ public class Maintenance implements Serializable {
 	public void setFactura_id(Long factura_id) {
 		this.factura_id = factura_id;
 	}
+
+	@Override
+	public String toString() {
+		return  "Service of: " + " " + identify + " " + "Products: " + listProducts + ", Price:" + price;
+	}
+
 
 	
 }

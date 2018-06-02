@@ -39,5 +39,11 @@ public class Plan implements Serializable{
 	public void setPorcentaje(Double porcentaje) {
 		this.porcentaje = porcentaje;
 	}
+	@Override
+	public String toString() {
+		return  name + ", Discount porcentaje:"+" " + porcentaje +" ";
+	}
+	
+	
 
 }

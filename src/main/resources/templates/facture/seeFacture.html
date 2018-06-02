@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+<head th:replace="layout/layoutUser :: header"></head>
+
+<div class="container py-4">
+	<div class="card bg-light">
+		<div class="card-header" th:text="${titul}" align="center"></div>
+
+
+		<div class="card-body">
+			<h4 class="card-title"></h4>
+			<a th:href="@{'/seeClient/'+ ${facture.car.client.id}}"
+				class="btn btn-success btn-xs">&laquo;Back Client</a>
+			<ul class="list-group my-2">
+				<li class="list-group-item list-group-item-secondary"
+					th:text="'About Client'"></li>
+				<li class="list-group-item" th:text="${facture.car.client}"></li>
+				<li class="list-group-item" th:text="${facture.car.client.email}"></li>
+
+			</ul>
+
+			<ul class="list-group ">
+				<li class="list-group-item list-group-item-success"
+					th:text="'About Facture'"></li>
+				<li class="list-group-item"
+					th:text="'Date: '+'&nbsp;'+${facture.createAt}"></li>
+				<li class="list-group-item"
+					th:text="'Total: '+'&nbsp;'+${facture.price}"></li>
+			</ul>
+
+			<table class="table table-striped table-hover table-bordered">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th> CONTRACT SERVICES</th>
+						<th>Total</th>
+					</tr>
+
+				</thead>
+				<tbody>
+					<tr th:each="item: ${facture.items}">
+						<td th:text="${item.id}"></td>
+						<td th:if="${item.maintenance}" th:text="${item.maintenance}"></td>
+						<td th:if="${item.revision}" th:text="${item.revision}"></td>
+						<td th:text="'TOTAL:'+${item.price}"></td>
+					</tr>
+				</tbody>
+
+
+			</table>
+		</div>
+	</div>
+</div>
+<footer th:replace="/layout/layout :: footer"></footer>
+
+</body>
+</html>
+
+
