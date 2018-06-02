@@ -34,31 +34,29 @@ public class UploadFileServiceImpl implements IUploadFileService {
 
 		return resource;
 	}
-
+	// retorna nombre unico de archivo
 	@Override
 	public String copy(MultipartFile file) throws IOException {
-		// guarda la imagenes en static, no viable ya que siempre se tiene que refrescar
-		// Path directoryResources = Paths.get("src//main//resources//static/uploads");
-		// String rootPath = directoryResources.toFile().getAbsolutePath();
-		// guardando en un directorio externo
-		// String rootPath="//Users//GraceToa//Documents//uploadsUdemy";
+		// Android
+		Path directoryResources = Paths.get("src//main//resources//static/uploads");
+		String rootPathA = directoryResources.toFile().getAbsolutePath();
 
 		// para que el nombre de la img sea unico
 		String uniqueFilename = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
 
-		// guardar en directorio absuluto y externo en raiz proyecto
+		// guardar en directorio absoluto y externo en raiz proyecto
 		Path rootPath = getPath(uniqueFilename);
 
 		log.info("rootPath:" + rootPath);// path relativo al proyecto
 
-		// 1 opcion
-		// byte[]bytes = photo.getBytes();
-		// Path rootComplet = Paths.get(rootPath + "//" + photo.getOriginalFilename());
-		// Files.write(rootComplet, bytes);
-		// 2 opcion
+		// 1 opcion Android
+		byte[] bytes = file.getBytes();
+		Path rootComplet = Paths.get(rootPathA + "//" + uniqueFilename);
+		Files.write(rootComplet, bytes);
+		// 2 opcion Spring
 		Files.copy(file.getInputStream(), rootPath);
 
-		return uniqueFilename;// retorna nombre unico de archivo
+		return uniqueFilename;
 	}
 
 	@Override

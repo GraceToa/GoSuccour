@@ -75,7 +75,7 @@ public class ClientController {
 		clientService.save(client);
 		User user = new User();
 		user.setClientId(client.getId());
-		model.addAttribute("titul", " Hello " + client.getSurname() + ", "+" "+ "choose Username and Password");
+		model.addAttribute("titul", " Hello " + client.getSurname() + ", " + " " + "choose Username and Password");
 		model.addAttribute("msg", user.getClientId());
 		status.setComplete();
 		return "login/loginFirst";
