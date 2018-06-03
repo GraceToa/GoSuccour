@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gosuccour.entity.Car;
+import com.gosuccour.entity.Client;
 import com.gosuccour.entity.Facture;
 import com.gosuccour.entity.ItemFacture;
 import com.gosuccour.entity.Itv;
@@ -55,7 +56,21 @@ public class AndroidControllerRestApi {
 		}
 		return null;
 	}
-
+	
+	@RequestMapping("/user")
+	public Client getUser(@RequestParam(value = "token", required = false) String token) {
+		Client client= new Client();
+		for (Map.Entry<String, String> entry : listToken.entrySet()) {
+			if (entry.getValue().equals(token)) {
+				client= clientService.getClient(entry.getKey());
+			}
+		}
+		return client;
+		
+	}
+	
+	
+	
 	@RequestMapping("/idCar")
 	public RequestFactura getFacture(@RequestParam(value = "idCar") long idCar, @RequestParam("token") String token) {
 		Car car = new Car();

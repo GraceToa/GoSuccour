@@ -145,6 +145,14 @@ public class ClientServImpl implements IClientService {
 		}
 		return check;
 	}
+	
+	public Client getClientToken(String username) {
+		User user = userDao.findByUsername(username);
+		Long clientId=user.getClientId();
+		Client client= clientDao.findById(clientId).orElse(null);	
+		return client;
+	}
+	
 
 	/* Car */
 	@Override
