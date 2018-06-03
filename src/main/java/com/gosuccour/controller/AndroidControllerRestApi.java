@@ -17,6 +17,7 @@ import com.gosuccour.entity.Facture;
 import com.gosuccour.entity.ItemFacture;
 import com.gosuccour.entity.Itv;
 import com.gosuccour.entity.Maintenance;
+import com.gosuccour.entity.Mechanic;
 import com.gosuccour.entity.Plan;
 import com.gosuccour.entity.Product;
 import com.gosuccour.entity.RequestFactura;
@@ -83,9 +84,9 @@ public class AndroidControllerRestApi {
 					saveProducts.add(product);
 					totalProduct += product.getPrice();
 				}
-			}			
+			}
 		}
-	
+
 		maintenance.setPrice(totalProduct);
 		maintenance.setListProducts(saveProducts);
 		clientService.saveMaintenance(maintenance);
@@ -118,7 +119,7 @@ public class AndroidControllerRestApi {
 					saveProducts.add(product);
 					totalProduct += product.getPrice();
 				}
-			}			
+			}
 		}
 		Double totalPorcentaje = revision.totalPriceRevision(planPorcentaje, totalProduct);
 		revision.setPrice(totalPorcentaje);
@@ -128,9 +129,7 @@ public class AndroidControllerRestApi {
 		itemFacture.setFacture_id(revision.getFactura_id());
 		itemFacture.setPrice(revision.getPrice());
 		clientService.saveItemFacture(itemFacture);
-
 		return revision;
-		//revision.setListProducts(allProducts);
 	}
 
 	@RequestMapping("/itv")
@@ -142,6 +141,47 @@ public class AndroidControllerRestApi {
 		itemFacture.setFacture_id(itv.getFactura_id());
 		clientService.saveItemFacture(itemFacture);
 		return itv;
+	}
+
+	/* Emergency */
+	@RequestMapping("/emergency")
+	public Mechanic distanciaCoordenadas(@RequestParam(value = "latitude") double latitude,
+			@RequestParam(value = "longitude") double longitude) {
+		List<Mechanic> listMechanic = clientService.findAllMechanic();
+		Map.Entry<Mechanic, Double> min = null;
+		HashMap<Mechanic, Double> increment = new HashMap<>();
+		for (Mechanic mechanic : listMechanic) {
+			double radioTierra = 6371;
+			double dLat = Math.toRadians(mechanic.getLatitude() - latitude);
+			double dLng = Math.toRadians(mechanic.getLongitude() - longitude);
+			double sindLat = Math.sin(dLat / 2);
+			double sindLng = Math.sin(dLng / 2);
+			double va1 = Math.pow(sindLat, 2) + Math.pow(sindLng, 2) * Math.cos(Math.toRadians(latitude))
+					* Math.cos(Math.toRadians(mechanic.getLatitude()));
+			double va2 = 2 * Math.atan2(Math.sqrt(va1), Math.sqrt(1 - va1));
+
+			double distancia = radioTierra * va2;
+			System.out.println(distancia);
+			increment.put(mechanic, distancia);
+
+		}
+		System.out.println();
+		for (Map.Entry<Mechanic, Double> map : increment.entrySet()) {
+			
+			if (min == null || map.getValue().compareTo(min.getValue()) < 0) {
+				min = map;
+			}
+		}
+
+		System.out.println(min.getValue());
+
+		for (Map.Entry<Mechanic, Double> map : increment.entrySet()) {
+			if (map.getValue().equals(min.getValue())) {
+				return map.getKey();
+			}
+		}
+
+		return listMechanic.get(0);
 
 	}
 

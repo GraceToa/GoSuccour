@@ -27,20 +27,25 @@
 				<input type="hidden" th:field="*{year}" th:value="${itv.year}" /> <input
 					type="hidden" name="idFacture" th:value="${facture.id}" />
 				<div class="form-group row">
-					<div class="col-sm-6">
+					<div class="col-sm-12" align="center">
 						<input type="submit" value="Contract ITV" class="btn btn-success " />
 					</div>
 				</div>
 			</form>
-
-			<div>
-				<a class="btn btn-success btn-xs"
-					th:href="@{'/facture/formBack/' + ${msg}}"
-					th:text="'Add Services'"></a>
+			<div class="row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-3" align="right">
+					<a class="btn btn-success btn-xs"
+						th:href="@{'/facture/formBack/' + ${msg}}"
+						th:text="'Add Services'"></a>
+				</div>
+				<div class="col-sm-3">
+					<a class="btn btn-success btn-xs"
+						th:href="@{'/seeClient/' + ${car.client.id}}"
+						th:text="'Back Client'"></a>
+				</div>
+				<div class="col-sm-3"></div>
 			</div>
-
-			<br />
-
 		</div>
 	</div>
 </div>

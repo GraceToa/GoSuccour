@@ -10,18 +10,35 @@
 		<div class="card-body">
 
 			<ul>
-				<li class="list-group-item" 
-					th:text="'&nbsp;'+'&nbsp;'+${car.client.surname}+'&nbsp;'+'&nbsp;'+${car.client.lastname}+ '&nbsp;'+'&nbsp;'+'You can use Emergencies for your Car: '+'&nbsp;'+${car.model}" align="center"></li>
-			
+				<li class="list-group-item"
+					th:text="'&nbsp;'+'&nbsp;'+${car.client.surname}+'&nbsp;'+'&nbsp;'+${car.client.lastname}+ '&nbsp;'+'&nbsp;'+'You can use Emergencies for your Car: '+'&nbsp;'+${car.model}"
+					align="center"></li>
+
 			</ul>
 
-			<br />
-	
+			<br /> <br />
+			<p align="center">
+				<strong>Download our APP</strong>
+			</p>
+			<div align="center">
+				<a href="https://play.google.com/store"><img
+					th:src="@{/images/succour.png}" alt="Spring logo" width="360"
+					height="350" /></a>
+			</div>
 			<br/>
-			<p align="center"><strong>Download our APP</strong></p>
-						<div align="center">
-				<a href="https://play.google.com/store"><img th:src="@{/images/succour.png}"
-					alt="Spring logo" width="360" height="350" /></a>
+			<div class="row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-3" align="right">
+					<a class="btn btn-success btn-xs"
+						th:href="@{'/facture/formBack/' + ${msg}}"
+						th:text="'Add Services'"></a>
+				</div>
+				<div class="col-sm-3">
+					<a class="btn btn-success btn-xs"
+						th:href="@{'/seeClient/' + ${car.client.id}}"
+						th:text="'Back Client'"></a>
+				</div>
+				<div class="col-sm-3"></div>
 			</div>
 		</div>
 	</div>

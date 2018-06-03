@@ -20,14 +20,14 @@ import com.gosuccour.service.IClientService;
 @Controller
 @SessionAttributes("user")
 public class LoginSpringController {
-	
+
 	@Autowired
 	IClientService clientService;
 
 	/* se tendria que guardar la contraseña cifrada */
 	@RequestMapping(value = "/loginFirst", method = RequestMethod.POST)
-	public String saveLoginFirstUser(Model model, @Valid User user,RedirectAttributes flash) {
-		User userFind=clientService.findOneUser(user.getClientId());
+	public String saveLoginFirstUser(Model model, @Valid User user, RedirectAttributes flash) {
+		User userFind = clientService.findOneUser(user.getClientId());
 		if (userFind != null) {
 			clientService.deleteUser(userFind.getId());
 		}
@@ -42,19 +42,26 @@ public class LoginSpringController {
 		model.put("titul", "Login");
 		return "login/login";
 	}
-	
-	@RequestMapping(value="/findClient", method = RequestMethod.POST)
-	public String checkLoginBD(Map<String, Object> model,@RequestParam Map<String, String> reqPar,RedirectAttributes flash) {
+
+	@RequestMapping(value = "/findClient", method = RequestMethod.POST)
+	public String checkLoginBD(Map<String, Object> model, @RequestParam Map<String, String> reqPar,
+			RedirectAttributes flash) {
 		String username = reqPar.get("username");
 		String password = reqPar.get("password");
-		int checkLogin =clientService.checkLogin(username, password);
+		int checkLogin = clientService.checkLogin(username, password);
 
-		if (checkLogin==1) {
-			Client client = clientService.getClient(username);
-			model.put("client", client);
-			model.put("titul", "Welcome "+ client.getSurname());
-			return "seeClient";
-		}else if(checkLogin==2) {
+		if (checkLogin == 1) {
+			if (username.equals("admin")) {
+			
+				return "redirect:clients";
+			} else {
+				Client client = clientService.getClient(username);
+				model.put("client", client);
+				model.put("titul", "Welcome " + client.getSurname());
+				return "seeClient";
+			}
+
+		} else if (checkLogin == 2) {
 			model.put("msg", "User ok, password wrong¡");
 			return "login/login";
 		}

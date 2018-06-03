@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http//www.thymeleaf.org">
-<head th:replace="layout/layout :: head"></head>
+<head th:replace="layout/layoutUser :: head"></head>
 
 <body>
-	<header th:replace="layout/layout :: header"></header>
+	<header th:replace="layout/layoutUser :: header"></header>
 	<div class="container py-4">
 		<div class="card bg-ligth">
 			<div class="card-header" th:text="${titul}"></div>
@@ -25,7 +25,6 @@
 							<th>City</th>
 							<th>Cp</th>
 							<th>Date</th>
-							<th>Create Facture</th>
 							<th>Edit</th>
 							<th>Delete</th>
 						</tr>
@@ -43,8 +42,6 @@
 						<td th:text="${client.city}"></td>
 						<td th:text="${client.cp}"></td>
 						<td th:text="${client.createAt}"></td>
-						<td><a class="btn btn-success btn-xs"
-							th:href="@{'/facture/form/' + ${client.id}}" th:text="'Facture'"></a></td>
 						<td><a class="btn btn-primary btn-xs"
 							th:href="@{/formClient/} + ${client.id}" th:text="'edit'"></a></td>
 						<td><a class="btn btn-primary btn-xs"

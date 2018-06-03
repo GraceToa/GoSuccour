@@ -25,24 +25,25 @@
 					th:text="'CAR:'+'&nbsp;'+'&nbsp;'+'&nbsp;'+${car.model}+'&nbsp;'+'&nbsp;'+'mtrl:'+'&nbsp;'+'&nbsp;'+${car.matriculation}"></li>
 				<li class="list-group-item"
 					th:text="'we  take care of passing the itv of your CAR:'+'&nbsp;'+'&nbsp;'+'&nbsp;'+${car.model}+'&nbsp;'+'&nbsp;'+'Matriculationl:'+'&nbsp;'+'&nbsp;'+${car.matriculation}+'&nbsp;'+'in the YEAR:'+'&nbsp;'+${itv.year}"></li>
-
 			</ul>
-
 			<br />
-
 			<div>
 				<p th:text="'TOTAL: '+'&nbsp;'+${itv.price}+'&euro;'"></p>
 			</div>
-			<div>
-				<a class="btn btn-success btn-xs"
-					th:href="@{'/facture/formBack/' + ${msg}}"
-					th:text="'Add Services'"></a>
-			</div>
 			<br />
-			<div>
-				<a class="btn btn-success btn-xs"
-					th:href="@{'/seeClient/' + ${car.client.id}}"
-					th:text="'Back Client'"></a>
+			<div class="row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-3" align="right">
+					<a class="btn btn-success btn-xs"
+						th:href="@{'/facture/formBack/' + ${msg}}"
+						th:text="'Add Services'"></a>
+				</div>
+				<div class="col-sm-3">
+					<a class="btn btn-success btn-xs"
+						th:href="@{'/seeClient/' + ${car.client.id}}"
+						th:text="'Back Client'"></a>
+				</div>
+				<div class="col-sm-3"></div>
 			</div>
 		</div>
 	</div>

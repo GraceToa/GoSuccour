@@ -199,6 +199,7 @@ public class FactureController {
 		Car car = facture.getCar();
 		model.addAttribute("car", car);
 		model.addAttribute("titul", "    EMERGENCY ");
+		model.addAttribute("msg", facture.getId());
 		return "facture/emergency";
 
 	}
@@ -222,12 +223,12 @@ public class FactureController {
 	public String seeFacture(@PathVariable(value = "idFacture") Long idFacture, Model model) {
 		Facture facture = clientService.findFactureById(idFacture);
 		model.addAttribute("facture", facture);
-		model.addAttribute("titul", "Facture: " + facture.getId());
+		//model.addAttribute("titul", "Facture: " + facture.getId());
 		return "facture/seeFacture";
 
 	}
 
-	@GetMapping("deleteFacture/{idFacture}")
+	@GetMapping("/deleteFacture/{idFacture}")
 	public String deleteFacture(@PathVariable(value = "idFacture") Long idFacture) {
 		Facture facture = clientService.findFactureById(idFacture);
 
