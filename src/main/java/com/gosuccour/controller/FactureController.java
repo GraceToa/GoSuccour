@@ -25,6 +25,7 @@ import com.gosuccour.entity.Plan;
 import com.gosuccour.entity.Product;
 import com.gosuccour.entity.Revision;
 import com.gosuccour.service.IClientService;
+import com.gosuccour.view.pdf.FacturePdfView;
 
 @Controller
 @SessionAttributes("car")
@@ -236,5 +237,15 @@ public class FactureController {
 		return "redirect: facture/seeClient/" + facture.getCar().getClient().getId();
 
 	}
+
+	@GetMapping("/sendEmail/{idCar}")
+	public String sendEmailClient(@PathVariable(value = "idCar") Long idCar,Model model) {
+		FacturePdfView.sendEmailClient();
+		Car car= clientService.findOneCar(idCar);
+		model.addAttribute("car", car);
+		//model.addAttribute("titul", "Facture: " + facture.getId());
+		return "car/seeCar";
+	}
+	
 
 }

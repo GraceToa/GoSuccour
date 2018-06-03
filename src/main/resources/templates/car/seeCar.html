@@ -10,10 +10,10 @@
 		<div class="card bg-light">
 			<div class="card-header" th:text="${titul}" align="center"></div>
 			<div class="card-body">
-			
+
 				<h4 class="card-title">
 					<a th:href="@{'/seeClient/'+ ${car.client.id}}"
-						class="btn btn-success btn-xs">&laquo;Back Client</a> 
+						class="btn btn-success btn-xs">&laquo;Back Client</a>
 				</h4>
 
 
@@ -51,6 +51,7 @@
 							<td><a class="btn btn-danger btn-xs"
 								th:href="@{'/facture/deleteFacture/'+${carListFactures.id}}"
 								th:text="'Delete'"></a></td>
+						
 						</tr>
 					</tbody>
 				</table>
