@@ -17,6 +17,7 @@ import javax.persistence.Table;
 
 import javax.validation.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -47,7 +48,8 @@ public class Car implements Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Client client;
-
+	
+	@JsonBackReference
 	@OneToMany(mappedBy = "car", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Facture> listFactures;
 
@@ -122,7 +124,6 @@ public class Car implements Serializable {
 	public static int calculItvYear(String matriculation) {
 		int numYear = 0;
 		String sSubCadena = matriculation.substring(4, 7);
-		
 
 		switch (sSubCadena) {
 		/* 2013 */
@@ -138,8 +139,8 @@ public class Car implements Serializable {
 		case "HTK":
 		case "HTV":
 		case "HVF":
-			numYear=resultITV(0,6);
-			
+			numYear = resultITV(0, 6);
+
 			break;
 		/* 2014 */
 		case "HVN":
@@ -154,7 +155,7 @@ public class Car implements Serializable {
 		case "HZZ":
 		case "JBL":
 		case "JBY":
-			numYear=resultITV(1,6);
+			numYear = resultITV(1, 6);
 			break;
 
 		/* 2015 */
@@ -170,7 +171,7 @@ public class Car implements Serializable {
 		case "JJW":
 		case "JKK":
 		case "JKZ":
-			numYear=resultITV(2,6);
+			numYear = resultITV(2, 6);
 			break;
 		/* 2016 */
 		case "JLN":
@@ -185,7 +186,7 @@ public class Car implements Serializable {
 		case "JTR":
 		case "JVH":
 		case "JVZ":
-			numYear=resultITV(3,6);
+			numYear = resultITV(3, 6);
 			break;
 		/* 2017 */
 		case "JWN":
@@ -200,7 +201,7 @@ public class Car implements Serializable {
 		case "KFB":
 		case "KFV":
 		case "KGN":
-			numYear=resultITV(4,6);
+			numYear = resultITV(4, 6);
 			break;
 		/* 2018 */
 		case "KHF":
@@ -208,13 +209,12 @@ public class Car implements Serializable {
 		case "KJV":
 		case "KKN":
 		case "KLH":
-			numYear=resultITV(5,6);
+			numYear = resultITV(5, 6);
 			break;
 		default:
 			break;
 
 		}
-
 
 		return numYear;
 	}

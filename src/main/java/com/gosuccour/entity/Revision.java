@@ -99,7 +99,7 @@ public class Revision implements Serializable{
 
 	@Override
 	public String toString() {
-		return "* Service of:  "+" " + identify + ", Price:" + " "+price +" "+ ", Your Plan of:" + listPlan.toString()
+		return "* Service of:  "+" " + identify + ", Your Plan of:" + listPlan.toString()
 				+ ",Product:" + listProducts ;
 	}
 

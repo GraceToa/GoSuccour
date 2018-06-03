@@ -108,6 +108,8 @@ public interface IClientService {
 	
 	public Facture findFactureById(Long id);
 	
+	public void deleteFacture(Long id);
+	
 	
 	
 	

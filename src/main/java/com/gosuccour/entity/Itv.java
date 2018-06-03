@@ -65,6 +65,11 @@ public class Itv implements Serializable{
 
 	public void setFactura_id(Long factura_id) {
 		this.factura_id = factura_id;
+	}
+
+	@Override
+	public String toString() {
+		return "* Service of: " +" "+ identify +" "+" "+ "You have contract for the:" +" "+ year;
 	} 
 	
 	

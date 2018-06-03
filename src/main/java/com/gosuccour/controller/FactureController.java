@@ -1,6 +1,5 @@
 package com.gosuccour.controller;
 
-
 import java.util.List;
 import java.util.Map;
 
@@ -27,17 +26,16 @@ import com.gosuccour.entity.Product;
 import com.gosuccour.entity.Revision;
 import com.gosuccour.service.IClientService;
 
-
 @Controller
 @SessionAttributes("car")
 @RequestMapping("/facture")
 public class FactureController {
-	
+
 	@Autowired
 	IClientService clientService;
-	
-	@GetMapping(value="/facture/{carId}")
-	public String goFormService(@PathVariable(name="carId")Long id, Model model) {
+
+	@GetMapping(value = "/facture/{carId}")
+	public String goFormService(@PathVariable(name = "carId") Long id, Model model) {
 		Car car = clientService.findOneCar(id);
 		if (car == null) {
 			return "redirect:seeClient";
@@ -49,15 +47,15 @@ public class FactureController {
 		model.addAttribute("facture", facture);
 		model.addAttribute("titul", "Facture for Services");
 		return "facture/facture";
-		
+
 	}
-	
-	/*Mantenimiento*/
-	@GetMapping(value="/maintenance/{factureId}")
-	public String goFormMaintenance(@PathVariable(name="factureId")Long factureId,Model model) {
-		Maintenance maintenance=new Maintenance();
+
+	/* Mantenimiento */
+	@GetMapping(value = "/maintenance/{factureId}")
+	public String goFormMaintenance(@PathVariable(name = "factureId") Long factureId, Model model) {
+		Maintenance maintenance = new Maintenance();
 		Facture facture = clientService.finOneFacture(factureId);
-		List<Product>allProducts=clientService.findAllProduct();
+		List<Product> allProducts = clientService.findAllProduct();
 		maintenance.setListProducts(allProducts);
 		maintenance.setPrice(0.0);
 		model.addAttribute("maintenance", maintenance);
@@ -65,24 +63,25 @@ public class FactureController {
 		model.addAttribute("facture", facture);
 		model.addAttribute("msg", facture.getId());
 		model.addAttribute("titul", "Service Maintenance for: ");
-		return "facture/formMaintenance";		
+		return "facture/formMaintenance";
 	}
-		
-	@PostMapping(value="/itemFacture")
-	public String saveFormMaintenance(Model model,@Valid Maintenance maintenance, @RequestParam Map<String, String> reqPar ) {
-		
-		String facture_id=reqPar.get("idFacture");
-		Long factureId=Long.parseLong(facture_id);
+
+	@PostMapping(value = "/itemFacture")
+	public String saveFormMaintenance(Model model, @Valid Maintenance maintenance,
+			@RequestParam Map<String, String> reqPar) {
+
+		String facture_id = reqPar.get("idFacture");
+		Long factureId = Long.parseLong(facture_id);
 		Facture facture = clientService.finOneFacture(factureId);
 		Car car = facture.getCar();
-		ItemFacture itemFacture = new ItemFacture();	
+		ItemFacture itemFacture = new ItemFacture();
 		Double total = 0.0;
-		List<Product>list =maintenance.getListProducts();
+		List<Product> list = maintenance.getListProducts();
 		for (Product product : list) {
-		 total += product.getPrice();			
+			total += product.getPrice();
 		}
 		maintenance.setPrice(total);
-		clientService.saveMaintenance(maintenance);//guarda maintenance
+		clientService.saveMaintenance(maintenance);// guarda maintenance
 		itemFacture.setMaintenance(maintenance);
 		itemFacture.setFacture_id(factureId);
 		itemFacture.setPrice(maintenance.getPrice());
@@ -92,17 +91,17 @@ public class FactureController {
 		model.addAttribute("itemFacture", itemFacture);
 		model.addAttribute("msg", facture_id);
 		model.addAttribute("titul", "    MAINTENANCE ");
-		return "facture/factureMaintenance";		
+		return "facture/factureMaintenance";
 	}
-	
-	/*Revision*/
-	@GetMapping(value="revision/{factureId}")
-	public String goFormRevision(Model model, @PathVariable(name="factureId")Long factureId) {
+
+	/* Revision */
+	@GetMapping(value = "revision/{factureId}")
+	public String goFormRevision(Model model, @PathVariable(name = "factureId") Long factureId) {
 		Revision revision = new Revision();
 		Facture facture = clientService.finOneFacture(factureId);
-		List<Product>allProducts=clientService.findAllProduct();
+		List<Product> allProducts = clientService.findAllProduct();
 		revision.setListProducts(allProducts);
-		List<Plan>allPlan= clientService.findAllPlan();
+		List<Plan> allPlan = clientService.findAllPlan();
 		model.addAttribute("revision", revision);
 		model.addAttribute("allPlan", allPlan);
 		model.addAttribute("allProducts", allProducts);
@@ -110,37 +109,38 @@ public class FactureController {
 		model.addAttribute("msg", facture.getId());
 		model.addAttribute("titul", "Service Revision for: ");
 		return "facture/formRevision";
-		
+
 	}
-	
-	@PostMapping(value="/itemRevision")
-	public String saveFormRevision(Model model,@Valid Revision revision, @RequestParam Map<String, String> reqPar, BindingResult result ) {
+
+	@PostMapping(value = "/itemRevision")
+	public String saveFormRevision(Model model, @Valid Revision revision, @RequestParam Map<String, String> reqPar,
+			BindingResult result) {
 
 		if (result.hasErrors()) {
 			model.addAttribute("titul", "Service Revision for:");
 			return "facture/formRevision";
 		}
 
-		String facture_id=reqPar.get("idFacture");
-		Long factureId=Long.parseLong(facture_id);
+		String facture_id = reqPar.get("idFacture");
+		Long factureId = Long.parseLong(facture_id);
 		Facture facture = clientService.finOneFacture(factureId);
 		Car car = facture.getCar();
-		ItemFacture itemFacture = new ItemFacture();	
-		
+		ItemFacture itemFacture = new ItemFacture();
+
 		Double planPorcentaje = null;
-		List<Plan>list =revision.getListPlan();
+		List<Plan> list = revision.getListPlan();
 		for (Plan plan : list) {
-			planPorcentaje= plan.getPorcentaje();	
+			planPorcentaje = plan.getPorcentaje();
 		}
 		System.out.println(planPorcentaje);
 		Double totalProduct = 0.0;
-		List<Product>listP =revision.getListProducts();
+		List<Product> listP = revision.getListProducts();
 		for (Product product : listP) {
-		 totalProduct += product.getPrice();			
+			totalProduct += product.getPrice();
 		}
 		Double totalPorcentaje = revision.totalPriceRevision(planPorcentaje, totalProduct);
 		revision.setPrice(totalPorcentaje);
-		clientService.saveRevision(revision);//genera revision bd
+		clientService.saveRevision(revision);// genera revision bd
 		itemFacture.setRevision(revision);
 		itemFacture.setFacture_id(factureId);
 		itemFacture.setPrice(revision.getPrice());
@@ -149,36 +149,37 @@ public class FactureController {
 		model.addAttribute("car", car);
 		model.addAttribute("msg", factureId);
 		model.addAttribute("titul", "    REVISION ");
-		return "facture/factureRevision";		
+		return "facture/factureRevision";
 	}
 
-	/*Itv*/
-	@GetMapping(value="/formItv/{factureId}")
-	public String goFormItv(Model model, @PathVariable(name="factureId")Long factureId) {
+	/* Itv */
+	@GetMapping(value = "/formItv/{factureId}")
+	public String goFormItv(Model model, @PathVariable(name = "factureId") Long factureId) {
 		Facture facture = clientService.finOneFacture(factureId);
 		Itv itv = new Itv();
-		Car car = facture.getCar();	
+		Car car = facture.getCar();
 		String carMatriculation = car.getMatriculation();
-		int calculItv=Car.calculItvYear(carMatriculation);
-		String calcuItv= String.valueOf(calculItv);
+		int calculItv = Car.calculItvYear(carMatriculation);
+		String calcuItv = String.valueOf(calculItv);
 		itv.setYear(calcuItv);
 		model.addAttribute("facture", facture);
 		model.addAttribute("car", car);
 		model.addAttribute("itv", itv);
 		model.addAttribute("msg", facture.getId());
 		model.addAttribute("titul", " Service  ITV ");
-		return "facture/formItv";	
+		return "facture/formItv";
 	}
-	
-	@PostMapping(value="/saveformItv")
-	public String saveItv(Model model, @Valid Itv itv, @RequestParam Map<String, String> reqPar ) {
-		String facture_id=reqPar.get("idFacture");
-		Long factureId=Long.parseLong(facture_id);
+
+	@PostMapping(value = "/saveformItv")
+	public String saveItv(Model model, @Valid Itv itv, @RequestParam Map<String, String> reqPar) {
+		String facture_id = reqPar.get("idFacture");
+		Long factureId = Long.parseLong(facture_id);
 		Facture facture = clientService.finOneFacture(factureId);
 		Car car = facture.getCar();
-		ItemFacture itemFacture = new ItemFacture();	
+		ItemFacture itemFacture = new ItemFacture();
 		itv.setPrice(120.0);
 		clientService.saveItv(itv);
+		itemFacture.setItv(itv);
 		itemFacture.setPrice(itv.getPrice());
 		itemFacture.setFacture_id(factureId);
 		clientService.saveItemFacture(itemFacture);
@@ -187,29 +188,26 @@ public class FactureController {
 		model.addAttribute("msg", facture_id);
 		model.addAttribute("titul", "    ITV ");
 		return "facture/factureItv";
-		
+
 	}
-	
-	
-	/*Emergency*/
-	
-	@GetMapping(value="/emergency/{factureId}")
-	public String goEmergency(Model model, @PathVariable(name="factureId")Long factureId) {
+
+	/* Emergency */
+
+	@GetMapping(value = "/emergency/{factureId}")
+	public String goEmergency(Model model, @PathVariable(name = "factureId") Long factureId) {
 		Facture facture = clientService.finOneFacture(factureId);
-		Car car = facture.getCar();	
+		Car car = facture.getCar();
 		model.addAttribute("car", car);
 		model.addAttribute("titul", "    EMERGENCY ");
 		return "facture/emergency";
-		
+
 	}
-	
-	
-	
-	/*Back Services*/
-	@GetMapping(value="/formBack/{factureId}")
-	public String goBackFormService(@PathVariable(name="factureId")Long factureId, Model model) {
+
+	/* Back Services */
+	@GetMapping(value = "/formBack/{factureId}")
+	public String goBackFormService(@PathVariable(name = "factureId") Long factureId, Model model) {
 		Facture facture = clientService.finOneFacture(factureId);
-		if (facture==null) {
+		if (facture == null) {
 			return "redirect:seeClient";
 		}
 		Double price = facture.getTotal();
@@ -217,23 +215,25 @@ public class FactureController {
 		model.addAttribute("facture", facture);
 		model.addAttribute("titul", "Facture for Services");
 		return "facture/facture";
-		
+
 	}
-	
+
 	@GetMapping("/seeFacture/{idFacture}")
-	public String seeFacture(@PathVariable(value="idFacture")Long idFacture,Model model) {
-		Facture facture= clientService.findFactureById(idFacture);
+	public String seeFacture(@PathVariable(value = "idFacture") Long idFacture, Model model) {
+		Facture facture = clientService.findFactureById(idFacture);
 		model.addAttribute("facture", facture);
-		model.addAttribute("titul","Facture: "+ facture.getId());
+		model.addAttribute("titul", "Facture: " + facture.getId());
 		return "facture/seeFacture";
-		
+
 	}
-	
-	
-	
-	
-	
-	
-	
+
+	@GetMapping("deleteFacture/{idFacture}")
+	public String deleteFacture(@PathVariable(value = "idFacture") Long idFacture) {
+		Facture facture = clientService.findFactureById(idFacture);
+
+		clientService.deleteFacture(idFacture);
+		return "redirect: facture/seeClient/" + facture.getCar().getClient().getId();
+
+	}
 
 }

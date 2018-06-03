@@ -187,6 +187,11 @@ public class ClientServImpl implements IClientService {
 		return factureDao.findById(id).orElse(null);
 	}
 	
+	@Override
+	public void deleteFacture(Long id) {
+		factureDao.deleteById(id);
+	}
+
 	/*ItemFacture*/
 	@Override
 	public void saveItemFacture(ItemFacture itemFacture) {
@@ -253,6 +258,7 @@ public class ClientServImpl implements IClientService {
 	public Page<Mechanic> findAllMechanic(Pageable pageable) {
 		return mechanicDao.findAll(pageable) ;
 	}
+
 
 	
 }// end class

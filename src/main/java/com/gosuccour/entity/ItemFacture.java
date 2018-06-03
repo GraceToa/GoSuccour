@@ -24,17 +24,23 @@ public class ItemFacture implements Serializable {
 	private Long id;
 
 	private Long facture_id;
-	
+
 	private Double price;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="maintenance_id")
+	@JoinColumn(name = "maintenance_id")
 	private Maintenance maintenance;
-		
+
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="revision_id")
+	@JoinColumn(name = "revision_id")
 	private Revision revision;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "itv_id")
+	private Itv itv;
 	
+	
+
 	public Long getId() {
 		return id;
 	}
@@ -42,7 +48,6 @@ public class ItemFacture implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 
 	public Maintenance getMaintenance() {
 		return maintenance;
@@ -75,11 +80,18 @@ public class ItemFacture implements Serializable {
 	public void setPrice(Double price) {
 		this.price = price;
 	}
+	
 
+	public Itv getItv() {
+		return itv;
+	}
+
+	public void setItv(Itv itv) {
+		this.itv = itv;
+	}
 
 	public Double calculateImport() {
-		Double total = maintenance.getPrice()+revision.getPrice();
-	return total;
-		
-}
+		Double total = maintenance.getPrice() + revision.getPrice();
+		return total;
+	}
 }

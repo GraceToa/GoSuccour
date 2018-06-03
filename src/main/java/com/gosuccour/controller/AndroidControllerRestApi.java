@@ -1,5 +1,6 @@
 package com.gosuccour.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -72,12 +73,21 @@ public class AndroidControllerRestApi {
 	@RequestMapping("/mantenimiento")
 	public Maintenance saveMaintenance(@RequestBody Maintenance maintenance) {
 		ItemFacture itemFacture = new ItemFacture();
-		Double total = 0.0;
-		List<Product> list = maintenance.getListProducts();
-		for (Product product : list) {
-			total += product.getPrice();
+		List<Product> allProductsBD = clientService.findAllProduct();
+		List<Product> productsA = maintenance.getListProducts();
+		List<Product> saveProducts = new ArrayList<Product>();
+		Double totalProduct = 0.0;
+		for (Product product : allProductsBD) {
+			for (Product productA : productsA) {
+				if (product.getId().equals(productA.getId())) {
+					saveProducts.add(product);
+					totalProduct += product.getPrice();
+				}
+			}			
 		}
-		maintenance.setPrice(total);
+	
+		maintenance.setPrice(totalProduct);
+		maintenance.setListProducts(saveProducts);
 		clientService.saveMaintenance(maintenance);
 		itemFacture.setMaintenance(maintenance);
 		itemFacture.setFacture_id(maintenance.getFactura_id());
@@ -97,16 +107,22 @@ public class AndroidControllerRestApi {
 		for (Plan plan : list) {
 			planPorcentaje = plan.getPorcentaje();
 		}
-		System.out.println(planPorcentaje);
+		List<Product> allProductsBD = clientService.findAllProduct();
+		List<Product> productsA = revision.getListProducts();
+		List<Product> saveProducts = new ArrayList<Product>();
 		Double totalProduct = 0.0;
-		List<Product> listP = revision.getListProducts();
-		for (Product product : listP) {
-			totalProduct += product.getPrice();
+		for (Product product : allProductsBD) {
+			for (Product productA : productsA) {
+				if (product.getId().equals(productA.getId())) {
+					System.out.println(revision.getId());
+					saveProducts.add(product);
+					totalProduct += product.getPrice();
+				}
+			}			
 		}
-		System.out.println(totalProduct);
 		Double totalPorcentaje = revision.totalPriceRevision(planPorcentaje, totalProduct);
-
 		revision.setPrice(totalPorcentaje);
+		revision.setListProducts(saveProducts);
 		clientService.saveRevision(revision);// genera revision bd
 		itemFacture.setRevision(revision);
 		itemFacture.setFacture_id(revision.getFactura_id());
@@ -114,7 +130,7 @@ public class AndroidControllerRestApi {
 		clientService.saveItemFacture(itemFacture);
 
 		return revision;
-
+		//revision.setListProducts(allProducts);
 	}
 
 	@RequestMapping("/itv")

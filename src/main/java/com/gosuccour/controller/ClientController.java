@@ -39,6 +39,7 @@ public class ClientController {
 
 	@RequestMapping("/")
 	public String getIndex(Model model) {
+		model.addAttribute("titul", "Go Succour");
 		return "index";
 	}
 

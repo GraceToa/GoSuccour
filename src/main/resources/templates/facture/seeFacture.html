@@ -10,9 +10,11 @@
 
 
 		<div class="card-body">
-			<h4 class="card-title"></h4>
-			<a th:href="@{'/seeClient/'+ ${facture.car.client.id}}"
-				class="btn btn-success btn-xs">&laquo;Back Client</a>
+			<h4 class="card-title">
+				<a th:href="@{'/seeClient/'+ ${facture.car.client.id}}"
+					class="btn btn-success btn-xs">&laquo;Back Client</a> 
+				<a class="btn btn-danger btn-xs float-right" th:href="@{'/facture/seeFacture/'+${facture.id}(format=pdf)}">PDF</a>
+			</h4>
 			<ul class="list-group my-2">
 				<li class="list-group-item list-group-item-secondary"
 					th:text="'About Client'"></li>
@@ -26,15 +28,16 @@
 					th:text="'About Facture'"></li>
 				<li class="list-group-item"
 					th:text="'Date: '+'&nbsp;'+${facture.createAt}"></li>
-				<li class="list-group-item"
-					th:text="'Total: '+'&nbsp;'+${facture.price}"></li>
 			</ul>
-
-			<table class="table table-striped table-hover table-bordered">
+			<div class="alert alert-info my-4"
+				th:if="${#lists.isEmpty(facture.items)}"
+				th:text="There is not Services Contracted"></div>
+			<table th:if="${not #lists.isEmpty(facture.items)}"
+				class="table table-striped table-hover table-bordered">
 				<thead>
 					<tr>
 						<th>ID</th>
-						<th> CONTRACT SERVICES</th>
+						<th>CONTRACT SERVICES</th>
 						<th>Total</th>
 					</tr>
 
@@ -44,12 +47,15 @@
 						<td th:text="${item.id}"></td>
 						<td th:if="${item.maintenance}" th:text="${item.maintenance}"></td>
 						<td th:if="${item.revision}" th:text="${item.revision}"></td>
-						<td th:text="'TOTAL:'+${item.price}"></td>
+						<td th:if="${item.itv}" th:text="${item.itv}"></td>
+						<td th:text="${item.price}"></td>
 					</tr>
 				</tbody>
-
-
 			</table>
+			<h5 class="float-right">
+				Total <span class="badge badge-secondary"
+					th:text="${facture.getTotal()}"></span>
+			</h5>
 		</div>
 	</div>
 </div>

@@ -57,13 +57,13 @@
 			<h5>
 				Total <span class="badge badge-secondary" th:text="${facture.price}"></span>
 			</h5>
-			
-						<div>
+
+			<div>
 				<a class="btn btn-success btn-xs"
 					th:href="@{'/seeClient/' + ${facture.car.client.id}}"
 					th:text="'Back Client'"></a>
 			</div>
-			
+
 		</div>
 	</div>
 </div>

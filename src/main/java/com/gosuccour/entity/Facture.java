@@ -21,6 +21,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "factures")
@@ -36,7 +37,8 @@ public class Facture implements Serializable {
 	private Date createAt;
 
 	private Double price;
-
+	
+	@JsonManagedReference
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Car car;
 

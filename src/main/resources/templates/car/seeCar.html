@@ -21,8 +21,8 @@
 						th:text="'CAR:'+ '&nbsp;' + '&nbsp;' +'&nbsp;' + ${car.model}"></li>
 
 				</ul>
-				
-					<div th:if="${#lists.isEmpty(car.listFactures)}"
+
+				<div th:if="${#lists.isEmpty(car.listFactures)}"
 					class="alert alert-info my-4"
 					th:text="'There are not Factures assigned for the Client: ' + ${client.surname} + ' ' + ${client.lastname}"></div>
 				<table th:if="${not #lists.isEmpty(car.listFactures)}"
@@ -33,7 +33,7 @@
 							<th>Date</th>
 							<th>Total</th>
 							<th>see Facture</th>
-							
+
 						</tr>
 					</thead>
 
@@ -45,13 +45,15 @@
 							<td><a class="btn btn-success btn-xs"
 								th:href="@{'/facture/seeFacture/'+${carListFactures.id}}"
 								th:text="'Details'"></a></td>
-
+							<td><a class="btn btn-danger btn-xs"
+								th:href="@{'/facture/deleteFacture/'+${carListFactures.id}}"
+								th:text="'Delete'"></a></td>
 						</tr>
 					</tbody>
 				</table>
-				
-				
-				
+
+
+
 			</div>
 		</div>
 	</div>
