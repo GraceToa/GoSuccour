@@ -96,6 +96,7 @@ public class Facture implements Serializable {
 	}
 
 	public void setPrice(Double price) {
+		price =getTotal();
 		this.price = price;
 	}
 
@@ -105,6 +106,7 @@ public class Facture implements Serializable {
 		for (int i = 0; i < size; i++) {
 			total += items.get(i).getPrice();
 		}
+		
 		return total;
 	}
 

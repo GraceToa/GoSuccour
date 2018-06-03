@@ -33,7 +33,7 @@ public class FactureControllerApiRest {
 		return maintenance;		
 	}
 	
-	@GetMapping("/facture/{id}")
+	@GetMapping("/{id}")
 	public Facture getFacture(@PathVariable Long id) {
 		Facture facture = clientService.finOneFacture(id);
 		return facture;

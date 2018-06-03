@@ -1,6 +1,7 @@
 package com.gosuccour.view.pdf;
 
 import java.awt.Color;
+import java.io.FileOutputStream;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,12 +23,14 @@ import com.lowagie.text.pdf.PdfWriter;
 public class FacturePdfView extends AbstractPdfView {
 	
 	 public static final String IMG = "src/main/resources/static/images/logoBlack.png";
+	 private String FILE ="src/main/resources/static/pdf/facture.pdf";
 	 
 	@Override
 	protected void buildPdfDocument(Map<String, Object> model, Document document, PdfWriter arg2,
 			HttpServletRequest arg3, HttpServletResponse arg4) throws Exception {
 		Facture facture = (Facture) model.get("facture");	
-		
+		PdfWriter.getInstance(document, new FileOutputStream(FILE));
+		document.open();
 		Image image = Image.getInstance(IMG);
 		image.scaleToFit(270, 123);
 		image.setAbsolutePosition( 150f, 200f);
@@ -97,7 +100,6 @@ public class FacturePdfView extends AbstractPdfView {
 		document.add(table);
 		document.add(table3);
 		document.add(table4);
-	
 		document.close();
 	}
 }
