@@ -149,7 +149,7 @@ public class FacturePdfView extends AbstractPdfView {
 
 			// now write the PDF content to the output stream
 			FileOutputStream fos = new FileOutputStream(new File("namesFilesClients"));
-			;
+			
 			outputStream = new ByteArrayOutputStream();
 			outputStream.writeTo(fos);
 			byte[] bytes = outputStream.toByteArray();

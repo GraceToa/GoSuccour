@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<header th:replace="layout/layoutUser :: header"></header>
+
+
+
+	<div class="container py-4">
+		<div class="card bg-light">
+			<div class="card-header" th:text="${titul}" align="center"></div>
+
+			<div class="navgo">
+				<ul>
+				<li><a th:href="@{/clients}">Clients</a></li>
+					<li><a th:href="@{/mechanics}">Mechanics</a></li>
+				</ul>
+			</div>
+			
+		
+
+			<div class="card-body">
+
+
+				<ul class="list-group">
+					<li class="list-group-item"
+						th:text="${mechanic.surname} + ' ' + '&nbsp;' + ${mechanic.lastname}"></li>
+					<li class="list-group-item"
+						th:text="'email:'+ '&nbsp;' + '&nbsp;' +'&nbsp;' + ${mechanic.email}"></li>
+					<li class="list-group-item"
+						th:text="'telephone:'+ '&nbsp;' + '&nbsp;' +'&nbsp;' + ${mechanic.phone}"></li>
+					<li class="list-group-item"
+						th:text="'address:'+ '&nbsp;' + '&nbsp;' +'&nbsp;' + ${mechanic.address} + '&nbsp;' + ${mechanic.country} +'&nbsp;' +${mechanic.city}+'&nbsp;' + ${mechanic.cp}"></li>
+					<li class="list-group-item"
+						th:text="'registration Date: '+ '&nbsp;' +'&nbsp;' +'&nbsp;' + ${mechanic.createAt}"></li>
+
+				</ul>
+			
+
+			</div>
+		</div>
+	</div>
+	<footer th:replace="/layout/layout :: footer"></footer>
+</body>
+</html>

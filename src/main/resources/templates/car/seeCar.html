@@ -35,8 +35,8 @@
 							<th>Folio</th>
 							<th>Date</th>
 							<th>Total</th>
-							<th>see Facture</th>
-
+							<th>Facture</th>
+							<th>Delete</th>
 						</tr>
 					</thead>
 
@@ -50,7 +50,7 @@
 								th:text="'Details'"></a></td>
 							<td><a class="btn btn-danger btn-xs"
 								th:href="@{'/facture/deleteFacture/'+${carListFactures.id}}"
-								th:text="'Delete'"></a></td>
+								th:text="'X'"></a></td>
 						
 						</tr>
 					</tbody>

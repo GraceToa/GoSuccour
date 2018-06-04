@@ -41,9 +41,8 @@ public class FactureController {
 		if (car == null) {
 			return "redirect:seeClient";
 		}
-		Facture facture = new Facture();
+		Facture facture = new Facture();		
 		facture.setCar(car);
-		facture.setPrice(0.0);
 		clientService.saveFacture(facture);
 		model.addAttribute("facture", facture);
 		model.addAttribute("titul", "Facture for Services");

@@ -57,7 +57,7 @@ public class LoginSpringController {
 			} else {
 				Client client = clientService.getClient(username);
 				model.put("client", client);
-				model.put("titul", "Welcome " + client.getSurname());
+				//model.put("titul", "Welcome " + client.getSurname());
 				return "seeClient";
 			}
 

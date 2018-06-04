@@ -107,41 +107,12 @@ public class CarController {
 		}
 		return "redirect:/seeClient/" + car.getClient().getId();
 	}
-
+	
 	@GetMapping("/seeCar/{id}")
 	public String getCar(@PathVariable(name = "id") Long id, Model model) {
 		Car car = clientService.findOneCar(id);
-		List<Facture>listFact=car.getListFactures();
-		/*for (Facture facture : listFact) {
-			List<ItemFacture>listItem=facture.getItems();
-		for (ItemFacture itemFacture : listItem) {
-				if (itemFacture.getMaintenance()!=null || itemFacture.getRevision()==null) {
-					Maintenance maintenance=itemFacture.getMaintenance();
-					model.addAttribute("car", car);
-					model.addAttribute("identifyM", maintenance.getIdentify());
-					model.addAttribute("priceM", maintenance.getPrice());
-					return "car/seeCar";
-
-				}else if (itemFacture.getRevision()!=null || itemFacture.getMaintenance()==null) {
-					Revision revision = itemFacture.getRevision();
-					model.addAttribute("car", car);
-					model.addAttribute("identifyR", revision.getIdentify());
-					model.addAttribute("priceR", revision.getPrice());
-					return "car/seeCar";
-				}else if (itemFacture.getRevision()!=null && itemFacture.getMaintenance()!=null) {
-					Revision revision = itemFacture.getRevision();
-					Maintenance maintenance=itemFacture.getMaintenance();
-					model.addAttribute("car", car);
-					model.addAttribute("identifyR", revision.getIdentify());
-					model.addAttribute("priceR", revision.getPrice());
-					model.addAttribute("identifyM", maintenance.getIdentify());
-					model.addAttribute("priceM", maintenance.getPrice());
-					return "car/seeCar";
-				}
-			
-		}	}*/	
 		model.addAttribute("car", car);
-		
 		return "car/seeCar";
+		
 	}
 }

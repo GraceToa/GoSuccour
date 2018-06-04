@@ -104,6 +104,10 @@ public interface IClientService {
 	
 	public Page<Mechanic> findAllMechanic(Pageable pageable);
 	
+	public Mechanic findOneMechanic(Long id);
+	
+	public void deleteMechanic(Long id);
+	
 	/*Facture*/
 	
 	public Facture findFactureById(Long id);

@@ -7,11 +7,16 @@
 	<div class="container py-4">
 		<div class="card bg-ligth">
 			<div class="card-header" th:text="${titul}"></div>
+
+			<div class="navgo">
+				<ul>
+					<li><a th:href="@{/clients}">Clients</a></li>
+					<li><a th:href="@{/mechanics}">Mechanics</a></li>
+				</ul>
+			</div>
+
 			<div class="card-body">
-				<h4 class="card-title">
-					<a th:href="@{/formClient}" class="btn btn-primary btn-xs">Create
-						Client</a>
-				</h4>
+			
 				<table class="table table-striped table bordered">
 					<thead class="thead-inverse">
 						<tr>
@@ -25,14 +30,13 @@
 							<th>City</th>
 							<th>Cp</th>
 							<th>Date</th>
-							<th>Edit</th>
 							<th>Delete</th>
 						</tr>
 					</thead>
 					<tboyd>
 					<tr th:each="client: ${clients}">
 						<td><a class="btn btn-primary btn-xs"
-							th:href="@{/seeClient/}+${client.id}" th:text="${client.id}"></a></td>
+							th:href="@{/seeClientAdmin/}+${client.id}" th:text="${client.id}"></a></td>
 						<td th:text="${client.surname}"></td>
 						<td th:text="${client.lastname}"></td>
 						<td th:text="${client.email}"></td>
@@ -43,9 +47,7 @@
 						<td th:text="${client.cp}"></td>
 						<td th:text="${client.createAt}"></td>
 						<td><a class="btn btn-primary btn-xs"
-							th:href="@{/formClient/} + ${client.id}" th:text="'edit'"></a></td>
-						<td><a class="btn btn-primary btn-xs"
-							th:href="@{/delete/} + ${client.id}" th:text="'delete'"
+							th:href="@{/deleteClientAdmin/} + ${client.id}" th:text="'delete'"
 							onclick="return confirm('Do you want delete this?');"></a></td>
 					</tr>
 					</tboyd>

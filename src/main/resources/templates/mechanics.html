@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http//www.thymeleaf.org">
-<head th:replace="layout/layout :: head"></head>
+<head th:replace="layout/layoutUser :: head"></head>
 
 <body>
-	<header th:replace="layout/layout :: header"></header>
+	<header th:replace="layout/layoutUser :: header"></header>
 	<div class="container py-4">
 		<div class="card bg-ligth">
 			<div class="card-header" th:text="${titul}"></div>
+			<div class="navgo">
+				<ul>
+					<li><a th:href="@{/clients}">Clients</a></li>
+					<li><a th:href="@{/mechanics}">Mechanics</a></li>
+				</ul>
+			</div>
+
 			<div class="card-body">
-			<!--  	<h4 class="card-title">
+				<!--  	<h4 class="card-title">
 					<a th:href="@{/formMechanic}" class="btn btn-primary btn-xs">Create
 						Client</a>
 				</h4>-->
@@ -21,25 +28,24 @@
 							<th>Telephone</th>
 							<th>Address</th>
 							<th>Date</th>
-							<th>Edit</th>
 							<th>Delete</th>
 						</tr>
 					</thead>
+
 					<tboyd>
-					<tr th:each="mechanic: ${mechanics}">
-						<td><a class="btn btn-primary btn-xs"
-							th:href="@{/seeMechanic/}+${mechanic.id}" th:text="${mechanic.id}"></a></td>
-						<td th:text="${mechanic.surname}+'&nbsp;'+${mechanic.lastname}"></td>
-						<td th:text="${mechanic.email}"></td>
-						<td th:text="${mechanic.phone}"></td>
-						<td th:text="${mechanic.city}+'&nbsp;'+${mechanic.cp}"></td>
-						<td th:text="${mechanic.createAt}"></td>
-						<td><a class="btn btn-primary btn-xs"
-							href="#" text="'edit'"></a></td>
-						<td><a class="btn btn-primary btn-xs"
-							href="#" text="'delete'"
-							onclick="return confirm('Do you want delete this?');"></a></td>
-					</tr>
+						<tr th:each="mechanic: ${mechanics}">
+							<td><a class="btn btn-primary btn-xs"
+								th:href="@{/seeMechanic/}+${mechanic.id}"
+								th:text="${mechanic.id}"></a></td>
+							<td th:text="${mechanic.surname}+'&nbsp;'+${mechanic.lastname}"></td>
+							<td th:text="${mechanic.email}"></td>
+							<td th:text="${mechanic.phone}"></td>
+							<td th:text="${mechanic.city}+'&nbsp;'+${mechanic.cp}"></td>
+							<td th:text="${mechanic.createAt}"></td>
+								<td><a class="btn btn-danger btn-xs"
+								th:href="@{'/deleteMechanic/' + ${mechanic.id}}" th:text="'X'"
+								onclick="return confirm('¿Do you want delete this?');"></a></td>
+						</tr>
 					</tboyd>
 				</table>
 				<nav th:replace="pagination-nav :: paginator"></nav>

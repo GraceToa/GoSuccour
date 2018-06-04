@@ -256,7 +256,8 @@ public class ClientServImpl implements IClientService {
 	public void saveLocationClient(Coordenadas coordenadas) {
 		coordenadasDao.save(coordenadas);
 	}
-
+	
+	/*Mechanic*/
 	@Override
 	public List<Mechanic> findAllMechanic() {
 		return (List<Mechanic>) mechanicDao.findAll();
@@ -265,6 +266,16 @@ public class ClientServImpl implements IClientService {
 	@Override
 	public Page<Mechanic> findAllMechanic(Pageable pageable) {
 		return mechanicDao.findAll(pageable) ;
+	}
+
+	@Override
+	public Mechanic findOneMechanic(Long id) {
+		return mechanicDao.findById(id).orElse(null);
+	}
+
+	@Override
+	public void deleteMechanic(Long id) {
+		mechanicDao.deleteById(id);
 	}
 
 

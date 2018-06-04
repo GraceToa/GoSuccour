@@ -12,11 +12,10 @@
 
 			<div class="navgo">
 				<ul>
-					<li><a th:href="@{'/car/form/' + ${client.id}}">Add Car</a></li>
-					<li><a th:href="@{/formClient/} + ${client.id}">Edit</a></li>
+					<li><a th:href="@{/clients}">Clients</a></li>
+					<li><a th:href="@{/mechanics}">Mechanics</a></li>
 				</ul>
 			</div>
-
 			<div class="card-body">
 
 				<!-- si no hay photo no se muestra el icono -->
@@ -50,26 +49,21 @@
 							<th>Pneumatic</th>
 							<th>TypeMotor</th>
 							<th>Displacement</th>
-							<th>Add Services</th>
 							<th>Delete</th>
 						</tr>
 					</thead>
 
 					<tbody>
 						<tr th:each="car: ${client.listCars}">
-							<td><a class="btn btn-primary btn-xs"
-							th:href="@{/car/seeCar/}+${car.id}" th:text="${car.id}"></a></td>
+							<td th:text="${car.id}"></td>
 							<td th:text="${car.model}"></td>
 							<td th:text="${car.matriculation}"></td>
 							<td th:text="${car.pneumatic}"></td>
 							<td th:text="${car.typeMotor}"></td>
 							<td th:text="${car.displacement}"></td>
-							<td><a class="btn btn-success btn-xs"
-								th:href="@{'/facture/facture/' + ${car.id}}"
-								th:text="'Add Services'"></a></td>
 							<td><a class="btn btn-danger btn-xs"
-								th:href="@{'/car/delete/' + ${car.id}}" th:text="'X'"
-								onclick="return confirm('¿Do you want delete this?');"></a></td>
+								th:href="@{'/deleteCarAdmin/' + ${car.id}}" th:text="'X'"
+								onclick="return confirm('¿Estas seguro que desea eliminar el coche?');"></a></td>
 
 						</tr>
 					</tbody>
