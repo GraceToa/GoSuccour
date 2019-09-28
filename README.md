@@ -18,7 +18,7 @@ Grace Toa  (App Developer)
 - Andorid Java
 - Thymeleaf
 
- * Official Documentation: [Spring Framework](https://spring.io/)Official Documentation
+ * Official Documentation: [Spring Framework](https://spring.io/)
  
  ## Link
 - GoSuccour: [Youtube]()
