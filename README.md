@@ -21,16 +21,5 @@ Grace Toa  (App Developer)
  * Official Documentation: [Spring Framework](https://spring.io/)
  
  ## Link
-- GoSuccour: [Youtube]()
+- GoSuccour: [Youtube](https://youtu.be/CbR0DZdpQic)
     
-
-<table border="3" bordercolor="black" align="center"width="9999">
-    <tr>
-        <th> GoSuccour </th> 
-    </tr>
-      
-<tr align="center">
- 
-</tr>
-</table>
-
